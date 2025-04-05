@@ -6,9 +6,11 @@ This is a full-stack Hostel Management System project designed to manage hostel-
 
 \`\`\`
 hostel-fullstack/
+
 ├── backend/               # Spring Boot project
 ├── frontend/              # React (Vite) project
 ├── hostel-database.sql    # MySQL database schema script
+
 \`\`\`
 
 ## Database Setup
