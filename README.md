@@ -43,7 +43,7 @@ USE HostelManagementSystem;
 
 - Apache Maven
 
-### Key Dependencies (\`pom.xml\`)
+### Dependencies (\`pom.xml\`)
 
 - \`spring-boot-starter-web\`  
 - \`spring-boot-starter-data-jpa\`  
