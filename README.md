@@ -6,11 +6,9 @@ This is a full-stack Hostel Management System project designed to manage hostel-
 
 \`\`\`
 hostel-fullstack/
-
-├── backend/               # Spring Boot project
-├── frontend/              # React (Vite) project
-├── hostel-database.sql    # MySQL database schema script
-
+├── backend/               Spring Boot project
+├── frontend/              React (Vite) project
+├── hostel-database.sql    MySQL database schema script
 \`\`\`
 
 ## Database Setup
@@ -19,10 +17,10 @@ hostel-fullstack/
 2. Open your MySQL client (e.g., MySQL CLI, DataGrip, phpMyAdmin).
 3. Run the provided SQL script:
 
-\`\`\`sql
+```sql
 SOURCE hostel-database.sql;
 USE HostelManagementSystem;
-\`\`\`
+```
 
 4. Confirm that the schema and all necessary tables are created.
 
@@ -45,58 +43,118 @@ USE HostelManagementSystem;
 
 - Apache Maven
 
+<<<<<<< HEAD
 ### Dependencies (\`pom.xml\`)
+=======
+### Key Dependencies (`pom.xml`)
+>>>>>>> 2762ce9 (Update README with detailed frontend documentation)
 
-- \`spring-boot-starter-web\`  
-- \`spring-boot-starter-data-jpa\`  
-- \`mysql-connector-j\`  
-- \`lombok\`  
-- \`twilio\`  
-- \`mailtrap-java\`  
-- \`bcrypt\`  
-- \`spring-boot-starter-test\` (for testing)
+- `spring-boot-starter-web`  
+- `spring-boot-starter-data-jpa`  
+- `mysql-connector-j`  
+- `lombok`  
+- `twilio`  
+- `mailtrap-java`  
+- `bcrypt`  
+- `spring-boot-starter-test` (for testing)
 
-### Configuration (\`application.properties\`)
+### Configuration (`application.properties`)
 
-- Application Name: \`HostelManagementSystem\`
-- Database: MySQL (\`localhost:3306/HostelManagementSystem\`)
+- Application Name: `HostelManagementSystem`
+- Database: MySQL (`localhost:3306/HostelManagementSystem`)
 - Hibernate SQL logging: enabled
 - Hibernate dialect: MySQL8Dialect
-- JDBC driver: \`com.mysql.cj.jdbc.Driver\`
+- JDBC driver: `com.mysql.cj.jdbc.Driver`
 - Debug logging enabled for Hibernate
 
 ### Running the Backend
 
-Ensure MySQL is running locally and accessible on port 3306. Update \`application.properties\` if your credentials differ.
+Ensure MySQL is running locally and accessible on port 3306. Update `application.properties` if your credentials differ.
 
-\`\`\`bash
+```bash
 cd backend
 ./mvnw spring-boot:run
-\`\`\`
+```
 
-By default, the backend will start on \`http://localhost:8080\`.
+By default, the backend will start on `http://localhost:8080`.
 
 ## Frontend
 
+The frontend is a modern single-page application built with React and Vite. It provides a responsive user interface and integrates seamlessly with the backend API.
+
 ### Technologies Used
 
-- React
-- Vite
+- React 19
+- Vite 6
+- React Router DOM 7
 - Axios
-- React Router
-- CSS Modules / Custom styling
+- Framer Motion
+- React Icons
+- date-fns
 
-### Running the Frontend
+### Development Tools and Linting
 
-Ensure you have Node.js installed. Then:
+- ESLint (with React and Hooks plugins)
+- Vite plugin for React
+- Module system: ECMAScript Modules (`"type": "module"`)
 
-\`\`\`bash
-cd frontend
+### Project Scripts
+
+You can use the following commands for development and production:
+
+```bash
+# Start development server
+npm run dev
+
+# Run a production build
+npm run build
+
+# Preview the build locally
+npm run preview
+
+# Run ESLint for code quality checks
+npm run lint
+```
+
+### Project Structure (Simplified)
+
+```
+frontend/
+├── public/                # Static assets
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── pages/             # Route-based React pages
+│   ├── styles/            # CSS modules or global styles
+│   ├── router/            # React Router configuration (if applicable)
+│   ├── services/          # Axios API service wrappers (if applicable)
+│   ├── App.jsx            # Main application wrapper
+│   └── main.jsx           # Application entry point
+├── package.json           # Project metadata and scripts
+├── vite.config.js         # Vite development config
+└── index.html             # Entry HTML file
+```
+
+### Running the Frontend Locally
+
+Make sure Node.js is installed. Then, from the `frontend` directory:
+
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
-The frontend runs on \`http://localhost:5173\` by default.
+The application will run by default at:  
+`http://localhost:5173/`
+
+Make sure your backend (`Spring Boot`) is running at `http://localhost:8080` to ensure full API connectivity.
+
+### Notes
+
+- API calls are handled with Axios
+- Animations are implemented using Framer Motion
+- Project follows modular architecture with reusable components
+- Routing is configured using `react-router-dom`
+- Code is linted using ESLint and follows React best practices
 
 ## Features
 
@@ -119,5 +177,4 @@ This project is developed for educational and demonstration purposes. Licensing 
 
 ## Contact
 
-For feedback or questions, please open an issue or contact with me  via GitHub.
-EOF
+For feedback or questions, please open an issue or contact with me via GitHub.
