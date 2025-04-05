@@ -1,0 +1,90 @@
+.hostel-map {
+    padding: 4rem 2rem;
+    background-color: #f9fafb;
+}
+
+.map-section-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    align-items: stretch;
+}
+
+/* Google Map Iframe */
+.map-container {
+    position: relative;
+    flex: 1 1 600px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    min-height: 400px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Floating icons */
+.floating-icons {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.floating-icon {
+    background-color: white;
+    padding: 8px 14px;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+/* Right info card */
+.map-info {
+    flex: 1 1 400px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.map-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #1d4ed8;
+}
+
+.map-info p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.map-info ul {
+    padding-left: 1.2rem;
+    list-style-type: disc;
+    color: #333;
+}
+
+.map-info li {
+    margin-bottom: 0.5rem;
+}

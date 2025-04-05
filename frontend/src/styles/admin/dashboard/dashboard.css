@@ -1,0 +1,37 @@
+
+
+/* =======================
+   Dashboard Layout Styles
+   ======================= */
+
+/* Main dashboard container padding adjustment */
+.admin-dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Ensuring main content respects sidebar width */
+.dashboard-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #1f2937;
+    color: white;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashboard-grid {
+    width: 100%;
+    max-width: 1750px;
+    padding: 0 20px;
+    margin: 20px auto 40px 0; /* decreased bottom margin */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+   gap: -5px;
+}

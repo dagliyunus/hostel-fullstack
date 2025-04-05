@@ -1,0 +1,19 @@
+# Java
+/target
+*.class
+*.jar
+*.war
+
+# Node/Vite
+/node_modules
+/dist
+
+# OS junk
+.DS_Store
+
+# IntelliJ & VSCode
+.idea
+.vscode
+
+# Env
+.env

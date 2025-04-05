@@ -1,0 +1,109 @@
+.contact-form-container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 3rem 2.5rem;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    color: #111827;
+    transition: all 0.3s ease-in-out;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.contact-form-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.contact-form-container h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+.contact-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-container input,
+.contact-form-container textarea {
+    margin-bottom: 1.5rem;
+    padding: 14px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #111827;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.contact-form-container input::placeholder,
+.contact-form-container textarea::placeholder {
+    color: #9ca3af;
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.contact-form-container textarea {
+    resize: vertical; /* Prevent horizontal stretching */
+    max-height: 200px; /* Optional: keep it neat */
+    overflow-y: auto;
+    min-height: 120px;
+}
+
+.contact-form-container button {
+    padding: 14px;
+    background: linear-gradient(90deg, #3b82f6, #2563eb);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+.contact-form-container button:hover {
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    transform: scale(1.02);
+}
+
+.success-message {
+    margin-top: 1rem;
+    text-align: center;
+    color: #10b981;
+    font-size: 1.1rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

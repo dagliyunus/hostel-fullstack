@@ -1,0 +1,66 @@
+const handleUpdateBedForPopup = async (roomId) => {
+        if (!showUpdateBedForm) {
+            setShowUpdateBedForm(true); // Show the form for updating the bed
+
+            // Find the room to update the bed in based on roomId
+            const roomToUpdate = rooms.find(r => r.roomId === roomId);
+            if (roomToUpdate) {
+                // Set the bed details into bedData state
+                setBedData({
+                    roomId: roomToUpdate.roomId,
+                    bedNumber: '',  // Initially empty or the selected bed number
+                    newBedNumber: '' // Initially empty
+                });
+            }
+        } else {
+            // Proceed to submit the updated bed data
+            try {
+                const updatedBed = {
+                    bedId: bedData.bedId,
+                    bedNumber: bedData.bedNumber,
+                    newBedNumber: bedData.newBedNumber, // Using the new bed number
+                    roomId: bedData.roomId
+                };
+
+                // Call the updateBed function to make the API request
+                await updateBed(bedData.roomId, updatedBed);
+
+                console.log("Bed updated successfully!");
+                alert('Bed updated successfully!');
+
+                // Reset the form and close it
+                setShowUpdateBedForm(false);
+                setBedData({
+                    roomId: '',
+                    bedId: '',
+                    bedNumber: '',
+                    newBedNumber: ''
+                });
+
+                // Refresh the beds for the updated room
+                const bedResponse = await getBedsByRoomId(bedData.roomId);
+                setBeds(bedResponse.data); // Update the beds state
+
+                // Refresh the selected room data to include the updated bed information
+                const res = await getRoomWithBeds(bedData.roomId);
+                setSelectedRoom(res.data); // Update the selected room data
+
+            } catch (error) {
+                console.error('Error updating bed:', error);
+                alert('Failed to update bed.');
+            }
+        }
+    };
+
+
+      <select
+                                        value={bedData.bedNumber}
+                                        onChange={(e) => setBedData({ ...bedData, bedNumber: e.target.value })}
+                                    >
+                                        <option value="">Select Bed Number</option>
+                                        {beds.map((bed) => (
+                                            <option key={bed.bedId} value={bed.bedNumber}>
+                                                {bed.bedNumber}
+                                            </option>
+                                        ))}
+                                    </select>

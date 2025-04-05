@@ -1,0 +1,51 @@
+/* ServiceHighlights.css */
+
+.service-highlights {
+    padding: 4rem 2rem;
+    background-color: var(--bg-color);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 3rem;
+    color: #222;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+    width: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    position: relative;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(100, 149, 237, 0.3);
+}
+
+.icon {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #444;
+}

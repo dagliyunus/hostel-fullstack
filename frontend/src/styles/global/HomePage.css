@@ -1,0 +1,14 @@
+
+/* Add to your global HomePage.css or index.css */
+html {
+    scroll-behavior: smooth;
+}
+
+.homepage-container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+}

@@ -1,0 +1,241 @@
+
+// createCustomer
+{
+    "customerId": "C001",
+    "firstName": "John",
+    "lastName": "Doe",
+    "dateOfBirth": "1990-05-15",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "room": {
+        "roomId": "R5"
+    },
+    "bed": {
+        "bedId": "B5"
+    }
+}
+
+package com.hostel.hostelmanagementsystem.service;
+
+import com.hostel.hostelmanagementsystem.dto.AdminCustomerDTO;
+import com.hostel.hostelmanagementsystem.model.Bed;
+import com.hostel.hostelmanagementsystem.model.Customer;
+import com.hostel.hostelmanagementsystem.model.Room;
+import com.hostel.hostelmanagementsystem.repository.BedRepository;
+import com.hostel.hostelmanagementsystem.repository.CustomerRepository;
+
+import com.hostel.hostelmanagementsystem.repository.RoomRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * Service layer for handling Customer-related operations.
+ * Acts as a bridge between the controller and repository layers.
+ * <p>
+ * This class encapsulates business logic related to the Customer entity,
+ * including retrieval, transformation to DTOs, and search operations.
+ * <p>
+ * It delegates data access tasks to the CustomerRepository while offering
+ * a clean, reusable API for controller classes.
+ */
+@Service
+public class CustomerService {
+
+    private final CustomerRepository customerRepository;
+    private final RoomRepository roomRepository;
+    private final BedRepository bedRepository;
+
+    /**
+     * Constructor-based dependency injection of CustomerRepository.
+     * Spring automatically injects an instance of the repository when the service is created.
+     *
+     * @param customerRepository the repository used to access customer data
+     */
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository, RoomRepository roomRepository, BedRepository bedRepository) {
+        this.customerRepository = customerRepository;
+        this.roomRepository = roomRepository;
+        this.bedRepository = bedRepository;
+    }
+
+    public Optional<Customer> findById(String customerId) {
+        return customerRepository.findById(customerId);
+    }
+
+    /**
+     * Retrieves a customer by their email address.
+     * This method is used when searching for a specific customer,
+     * and admin searches.
+     * <p>
+     * The return type is Optional to safely handle the case where
+     * no customer with the given email is found, avoiding null pointer exceptions.
+     *
+     * @param email the email address of the customer to retrieve
+     * @return an Optional containing the Customer if found, or empty if not found
+     */
+    public Optional<Customer> getCustomerByEmail(String email){
+        return customerRepository.findByEmail(email);
+    }
+
+    /**
+     * Retrieves all customers from the database and maps them into AdminCustomerDTO objects.
+     * This method is specifically used to populate the customer list view in the admin dashboard.
+     * <p>
+     * It uses Java Stream API to transform a List of Customer entities into a List of DTOs.
+     * The .stream() call converts the list into a stream for processing,
+     * .map(c -> ...) transforms each Customer object into an AdminCustomerDTO using a constructor,
+     * and .collect(Collectors.toList()) gathers the results back into a List.
+     * <p>
+     * Each customer entity is transformed to a DTO containing key information such as:
+     * ID, name, email, phone, date of birth, registration date, and associated room number.
+     *
+     * @return a list of AdminCustomerDTOs representing all registered customers
+     */
+    public List<AdminCustomerDTO> getAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return customers.stream()
+                .map(c -> new AdminCustomerDTO(
+                        c.getCustomerId(),
+                        c.getFirstName(),
+                        c.getLastName(),
+                        c.getEmail(),
+                        c.getPhone(),
+                        c.getDateOfBirth(),
+                        c.getRoom() != null ? c.getRoom().getRoomNumber() : null,
+                        c.getBed().getBedNumber(),
+                        c.getRegisteredAt()
+                )).collect(Collectors.toList());
+    }
+
+    private String generateNextCustomerId() {
+        List<Customer> allCustomers = customerRepository.findAll();
+
+        int max = allCustomers.stream()
+                .map(Customer::getCustomerId)
+                .filter(id -> id.startsWith("C"))
+                .map(id -> id.substring(1))     // remove "C"
+                .filter(s -> s.matches("\\d+")) // digits only
+                .mapToInt(Integer::parseInt)
+                .max()
+                .orElse(0);
+
+        return "C" + (max + 1);
+    }
+
+    @Transactional
+    public AdminCustomerDTO createCustomer(AdminCustomerDTO dto) {
+        // 💡 Convert DTO → Entity
+        Customer customer = new Customer();
+        customer.setFirstName(dto.getFirstName());
+        customer.setLastName(dto.getLastName());
+        customer.setEmail(dto.getEmail());
+        customer.setPhone(dto.getPhone());
+        customer.setDateOfBirth(dto.getDateOfBirth());
+        customer.setRegisteredAt(dto.getRegisteredAt());
+
+        // 📌 Assign Room from roomNumber
+        if (dto.getRoomNumber() != null) {
+            Room room = roomRepository.findByRoomNumber(dto.getRoomNumber())
+                    .orElseThrow(() -> new IllegalArgumentException("Room number not found: " + dto.getRoomNumber()));
+            customer.setRoom(room);
+
+            // 🛏 Assign first available Bed in room
+            List<Bed> bedsInRoom = bedRepository.findByRoom(room);
+            for (Bed bed : bedsInRoom) {
+                boolean isOccupied = customerRepository.existsByBed(bed);
+                if (!isOccupied) {
+                    customer.setBed(bed);
+                    break;
+                }
+            }
+
+            if (customer.getBed() == null) {
+                throw new IllegalStateException("No available beds in room: " + room.getRoomNumber());
+            }
+        } else {
+            throw new IllegalArgumentException("Room number must be provided.");
+        }
+
+        // 🆔 Generate ID
+        customer.setCustomerId(generateNextCustomerId());
+
+        // 💾 Save and map back to DTO
+        Customer saved = customerRepository.save(customer);
+        return mapToDTO(saved);
+    }
+
+    @Transactional
+    public Customer updateCustomer(AdminCustomerDTO dto) {
+        Optional<Customer> currentCustomerOpt = customerRepository.findById(dto.getCustomerId());
+
+        if (currentCustomerOpt.isEmpty()) {
+            throw new IllegalArgumentException("Customer with id " + dto.getCustomerId() + " not found");
+        }
+
+        Customer currentCustomer = currentCustomerOpt.get();
+
+        // 🔧 Update personal fields
+        currentCustomer.setFirstName(dto.getFirstName());
+        currentCustomer.setLastName(dto.getLastName());
+        currentCustomer.setEmail(dto.getEmail());
+        currentCustomer.setPhone(dto.getPhone());
+        currentCustomer.setDateOfBirth(dto.getDateOfBirth());
+        currentCustomer.setRegisteredAt(dto.getRegisteredAt());
+
+        // 🔄 Auto-fetch Room by roomNumber
+        if (dto.getRoomNumber() != null) {
+            Room room = roomRepository.findByRoomNumber(dto.getRoomNumber())
+                    .orElseThrow(() -> new IllegalArgumentException("Room number not found: " + dto.getRoomNumber()));
+            currentCustomer.setRoom(room);
+
+            // 🔄 Auto-assign first available Bed in Room
+            List<Bed> bedsInRoom = bedRepository.findByRoom(room);
+            for (Bed bed : bedsInRoom) {
+                boolean isOccupied = customerRepository.existsByBed(bed);
+                if (!isOccupied) {
+                    currentCustomer.setBed(bed);
+                    break;
+                }
+            }
+
+            if (currentCustomer.getBed() == null) {
+                throw new IllegalStateException("No available beds in room: " + room.getRoomNumber());
+            }
+        }
+
+        return customerRepository.save(currentCustomer);
+    }
+
+        return customerRepository.save(currentCustomer);
+    }
+
+    @Transactional
+    public void deleteCustomer(String customerId) {
+        Optional<Customer> currentCustomerOpt = customerRepository.findById(customerId);
+        if(currentCustomerOpt.isPresent()) {
+            customerRepository.deleteById(customerId);
+        }else{
+            throw new  IllegalArgumentException("Customer with id" + customerId + " not found");
+        }
+    }
+
+    public AdminCustomerDTO mapToDTO(Customer customer) {
+        return new AdminCustomerDTO(
+                customer.getCustomerId(),
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getEmail(),
+                customer.getPhone(),
+                customer.getDateOfBirth(),
+                customer.getRoom() != null ? customer.getRoom().getRoomNumber() : null,
+                customer.getBed() != null ? customer.getBed().getBedNumber() : null,
+                customer.getRegisteredAt()
+        );
+    }
+
+}
