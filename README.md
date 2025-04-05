@@ -1,4 +1,3 @@
-cat <<EOF > ~/IdeaProjects/hostel-fullstack/README.md
 # Hostel Management System
 
 This is a full-stack Hostel Management System project designed to manage hostel-related functionalities such as room bookings, user administration, notifications, and system integrations. The backend is built with Java Spring Boot, while the frontend uses React with Vite. MySQL is used as the relational database system.
