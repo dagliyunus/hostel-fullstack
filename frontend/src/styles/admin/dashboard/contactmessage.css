@@ -1,3 +1,9 @@
+
+/**
+ * .contact-message-wrapper
+ * Wraps the entire contact message section. Limits the width and centers content
+ * with left margin to accommodate sidebar layout.
+ */
 .contact-message-wrapper {
     width: 100%;
     max-width: 1750px;
@@ -5,6 +11,10 @@
     margin: 20px auto 20px 200px;
 }
 
+/**
+ * .contact-message-container
+ * Styles the message box container with dark theme, rounded edges, shadow, and entry animation.
+ */
 .contact-message-container {
     background: #1f2937;
     color: #f3f4f6;
@@ -16,6 +26,10 @@
     animation: fadeInSlide 0.6s ease-in-out;
 }
 
+/**
+ * @keyframes fadeInSlide
+ * Animates the container's entry from below with fade-in.
+ */
 @keyframes fadeInSlide {
     0% {
         opacity: 0;
@@ -27,11 +41,19 @@
     }
 }
 
+/**
+ * .contact-table-wrapper
+ * Provides horizontal scroll if content overflows. Smooth transition on layout changes.
+ */
 .contact-table-wrapper {
     overflow-x: auto;
     transition: all 0.3s ease-in-out;
 }
 
+/**
+ * .contact-message-table
+ * Styled container for tabular contact messages. Uses custom coloring, spacing, and border style.
+ */
 .contact-message-table {
     width: 100%;
     border-collapse: separate;
@@ -42,6 +64,10 @@
     overflow: hidden;
 }
 
+/**
+ * .contact-message-table thead th
+ * Styles table headers with bold, uppercase text and dark background.
+ */
 .contact-message-table thead th {
     background-color: #142030;
     padding: 14px;
@@ -53,6 +79,10 @@
     border-bottom: 1px solid #374151;
 }
 
+/**
+ * .contact-message-table tbody tr
+ * Enables hover highlighting and pointer cursor on rows.
+ */
 .contact-message-table tbody tr {
     transition: background-color 0.2s ease;
     cursor: pointer;
@@ -62,6 +92,10 @@
     background-color: #374151;
 }
 
+/**
+ * .contact-message-table td
+ * Applies standard padding, color, and border to table cells.
+ */
 .contact-message-table td {
     padding: 14px;
     text-align: center;
@@ -70,7 +104,10 @@
     border-bottom: 1px solid #374151;
 }
 
-/* See all button */
+/**
+ * .see-all-btn
+ * Styles the "See All" button with rounded corners and blue background. Includes hover animation.
+ */
 .see-all-btn {
     margin-top: 16px;
     padding: 10px 20px;
@@ -88,6 +125,10 @@
     transform: translateY(-2px);
 }
 
+/**
+ * .unread-notification
+ * Highlights unread messages with background color, bold text, and glowing animation.
+ */
 .unread-notification {
     background-color: #2d3748;
     font-weight: 600;
@@ -95,6 +136,10 @@
     animation: glow 0.5s ease-in-out infinite alternate;
 }
 
+/**
+ * @keyframes glow
+ * Creates pulsing glow effect to draw attention to unread notifications.
+ */
 @keyframes glow {
     0% {
         box-shadow: 0 0 5px #3b82f6;
@@ -104,6 +149,10 @@
     }
 }
 
+/**
+ * .modal-backdrop
+ * Fullscreen overlay for modal dialogs, with semi-transparent background and centered content.
+ */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -117,6 +166,10 @@
     z-index: 1000;
 }
 
+/**
+ * .modal-content
+ * Styles the inner modal window with rounded corners, shadow, padding, and animation.
+ */
 .modal-content {
     background-color: #1f2937;
     color: #f3f4f6;
@@ -128,6 +181,10 @@
     animation: slideIn 0.3s ease-out;
 }
 
+/**
+ * @keyframes slideIn
+ * Handles modal's slide-up and fade-in entrance.
+ */
 @keyframes slideIn {
     from {
         transform: translateY(20px);
@@ -139,6 +196,10 @@
     }
 }
 
+/**
+ * .modal-content button
+ * Blue buttons used inside the modal. Styled for readability and interaction.
+ */
 .modal-content button {
     margin-top: 1rem;
     padding: 10px 20px;
@@ -152,3 +213,36 @@
 .modal-content button:hover {
     background-color: #1e40af;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

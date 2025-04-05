@@ -2,12 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import '../../styles/global/BookingSection.css';
 
+/**
+ * Maps room codes to their respective prices per night.
+ * @type {Object<string, number>}
+ * @property {'RN1'} 2-bed room → €25 per night
+ * @property {'RN2'} 4-bed room → €20 per night
+ * @property {'RN3'} 6-bed room → €15 per night
+ */
 const roomPrices = {
     'RN1': 25,
     'RN2': 20,
     'RN3': 15
 };
 
+/**
+ * Calculates the number of nights between two dates.
+ *
+ * @param {string} checkIn - ISO string representing the check-in date (yyyy-mm-dd).
+ * @param {string} checkOut - ISO string representing the check-out date (yyyy-mm-dd).
+ * @returns {number} The number of nights. Returns 0 if checkOut is before or same as checkIn.
+ */
 const calculateNights = (checkIn, checkOut) => {
     const inDate = new Date(checkIn);
     const outDate = new Date(checkOut);
@@ -15,6 +29,10 @@ const calculateNights = (checkIn, checkOut) => {
     return diff > 0 ? Math.ceil(diff / (1000 * 3600 * 24)) : 0;
 };
 
+/**
+ * Initial state object for the booking form.
+ * Used by React's `useState` to reset or populate the form.
+ */
 const initialFormState = {
     roomType: '',
     checkIn: '',
@@ -32,6 +50,19 @@ const initialFormState = {
     cvv: ''
 };
 
+/**
+ * BookingSection React component.
+ *
+ * Renders the booking form, handles room availability checking, booking submission,
+ * summary display, and confirmation response.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Object} props.searchCriteria - Search data passed from parent (e.g. Home page).
+ * @param {string} props.searchCriteria.checkIn - Check-in date.
+ * @param {string} props.searchCriteria.checkOut - Check-out date.
+ * @param {number} props.searchCriteria.guests - Number of guests.
+ */
 const BookingSection = ({ searchCriteria }) => {
     const [formData, setFormData] = useState(initialFormState);
     const [confirmation, setConfirmation] = useState(null);
@@ -50,15 +81,20 @@ const BookingSection = ({ searchCriteria }) => {
         }
     }, [searchCriteria]);
 
+    /**
+     * Fetches available rooms from backend based on the current search criteria.
+     * Automatically selects the first room if none is pre-selected.
+     * Executed every time `searchCriteria` changes.
+     */
     useEffect(() => {
         const fetchAvailableRooms = async () => {
             const { checkIn, checkOut, guests } = searchCriteria || {};
 
-            console.log('🔎 Triggered fetchAvailableRooms');
-            console.log('🗓️ checkIn:', checkIn, '| checkOut:', checkOut, '| guests:', guests);
+            console.log(' Triggered fetchAvailableRooms');
+            console.log(' checkIn:', checkIn, '| checkOut:', checkOut, '| guests:', guests);
 
             if (!checkIn || !checkOut || guests < 1) {
-                console.log('⛔ Missing data - aborting fetch.');
+                console.log(' Missing data - aborting fetch.');
                 return;
             }
 
@@ -71,24 +107,24 @@ const BookingSection = ({ searchCriteria }) => {
 
                 if (!res.ok) {
                     const errorText = await res.text();
-                    console.error('❌ Fetch failed:', errorText);
+                    console.error(' Fetch failed:', errorText);
                     setAvailableRooms([]);
                     return;
                 }
 
                 const data = await res.json();
-                console.log('✅ Available rooms from backend:', data);
+                console.log(' Available rooms from backend:', data);
                 setAvailableRooms(data);
 
                 if (data.length > 0 && !formData.roomType) {
                     setFormData(prev => {
                         const updated = { ...prev, roomType: data[0] };
-                        console.log('📝 Auto-selected roomType:', updated.roomType);
+                        console.log(' Auto-selected roomType:', updated.roomType);
                         return updated;
                     });
                 }
             } catch (error) {
-                console.error('🚨 Error fetching rooms:', error);
+                console.error(' Error fetching rooms:', error);
                 setAvailableRooms([]);
             } finally {
                 setLoadingRooms(false);
@@ -104,6 +140,9 @@ const BookingSection = ({ searchCriteria }) => {
 
     const totalControls = useAnimation();
 
+    /**
+     * Triggers a total-price animation when nights and roomType are both valid.
+     */
     useEffect(() => {
         if (nights > 0 && roomPrices[formData.roomType]) {
             totalControls.start({
@@ -127,6 +166,11 @@ const BookingSection = ({ searchCriteria }) => {
         if (selectedRoom) sessionStorage.removeItem("selectedRoom");
     }, [searchCriteria]);
 
+    /**
+     * Handles updates to form fields by updating local `formData` state.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - The change event from input/select element.
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -135,6 +179,13 @@ const BookingSection = ({ searchCriteria }) => {
         }));
     };
 
+    /**
+     * Handles form submission to create a booking.
+     * Sends booking data to the backend and resets form on success.
+     * Also triggers SMS notification via a contact endpoint.
+     *
+     * @param {React.FormEvent<HTMLFormElement>} e - The form submit event.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -162,7 +213,7 @@ const BookingSection = ({ searchCriteria }) => {
                 setConfirmation(data);
                 setFormData(initialFormState);
 
-                // 👇 NEW: Trigger SMS sending
+                //  Trigger SMS sending
                 await fetch("http://localhost:8080/api/contact/send-sms", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

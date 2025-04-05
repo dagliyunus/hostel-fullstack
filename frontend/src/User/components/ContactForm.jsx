@@ -3,20 +3,61 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../../styles/global/ContactForm.css';
 
+/**
+ * ContactForm component for user inquiries and feedback.
+ *
+ * Allows users to submit their name, email, and a message. Upon submission,
+ * the data is sent to a backend API endpoint (`/api/contact/send-email`) via POST request.
+ * Displays success or failure messages based on the response.
+ *
+ * @component
+ * @returns {JSX.Element} Rendered contact form UI.
+ */
 const ContactForm = () => {
+    /**
+     * State hook to manage form input fields.
+     *
+     * @type {[{ name: string, email: string, message: string }, Function]}
+     */
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     });
 
+    /**
+     * Tracks whether the form has been successfully submitted.
+     *
+     * @type {[boolean, Function]}
+     */
     const [submitted, setSubmitted] = useState(false);
+    /**
+     * Tracks the status message for the form submission (e.g., success/failure/loading).
+     *
+     * @type {[string, Function]}
+     */
     const [status, setStatus] = useState('');
 
+    /**
+     * Handles user input changes for the form fields.
+     *
+     * Dynamically updates `formData` based on input `name` and `value`.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - The event object from input/textarea.
+     */
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    /**
+     * Handles the form submission event.
+     *
+     * Sends the form data to the backend API. On success, resets the form
+     * and shows a success message. On failure, shows an error status.
+     *
+     * @param {React.FormEvent<HTMLFormElement>} e - The form submission event.
+     * @async
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('Sending...');
@@ -25,10 +66,10 @@ const ContactForm = () => {
             await axios.post('http://localhost:8080/api/contact/send-email', formData);
             setSubmitted(true);
             setFormData({ name: '', email: '', message: '' });
-            setStatus('✅ Message sent successfully!');
+            setStatus(' Message sent successfully!');
         } catch (error) {
-            console.error('❌ Contact form error:', error);
-            setStatus('❌ Failed to send message. Please try again.');
+            console.error(' Contact form error:', error);
+            setStatus(' Failed to send message. Please try again.');
         }
     };
 

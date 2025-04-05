@@ -2,15 +2,20 @@ import React from 'react';
 import '../../styles/admin/managementTables/style.css';
 
 /**
- * CustomerTable Component
- *
- * Displays a dynamic HTML table of all hostel customers provided via props.
- * Each customer is rendered as a row containing key attributes like ID, name,
- * email, phone number, room and bed numbers. A set of action buttons is available per customer.
+ * CustomerTable component displays a table of customer information with an edit action.
  *
  * @component
- * @param {Object[]} customers - Array of customer DTOs to be displayed.
- * @param {function} onEdit - Callback fired when the "Edit" button is clicked for a customer.
+ * @param {Object} props - Component props.
+ * @param {Array<Object>} props.customers - Array of customer objects to display.
+ * @param {string} props.customers[].customerId - Unique ID of the customer.
+ * @param {string} props.customers[].firstName - First name of the customer.
+ * @param {string} props.customers[].lastName - Last name of the customer.
+ * @param {string} props.customers[].email - Email address of the customer.
+ * @param {string} props.customers[].phone - Phone number of the customer.
+ * @param {string|number} props.customers[].roomNumber - Room number assigned to the customer.
+ * @param {string|number} props.customers[].bedNumber - Bed number assigned to the customer.
+ * @param {function} props.onEdit - Callback function triggered when the "Edit" button is clicked.
+ * @returns {JSX.Element} A JSX element displaying a formatted customer table.
  */
 const CustomerTable = ({ customers, onEdit }) => {
     return (

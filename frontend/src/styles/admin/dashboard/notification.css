@@ -5,6 +5,12 @@
     margin: 20px auto 20px 200px;
 }
 
+/**
+ * Container for the notification card layout.
+ * - Uses a dark background with white text.
+ * - Rounded corners, inner padding, and drop shadow for elevation.
+ * - Includes entrance animation and smooth transform transitions.
+ */
 .notification-container {
     background: #1f2937;
     color: #f3f4f6;
@@ -16,7 +22,10 @@
     animation: fadeInSlide 0.6s ease-in-out;
 }
 
-/* Smooth entrance */
+/**
+ * @keyframes fadeInSlide
+ * Smooth entrance animation from below with fade-in effect.
+ */
 @keyframes fadeInSlide {
     0% {
         opacity: 0;
@@ -28,12 +37,21 @@
     }
 }
 
+/**
+ * Provides horizontal scrolling for large tables.
+ * - Ensures layout doesn't break on smaller screens.
+ * - Includes transition for smooth appearance.
+ */
 .notification-table-wrapper {
     overflow-x: auto;
     transition: all 0.3s ease-in-out;
 }
 
-/* Table design */
+/**
+ * Main table layout for displaying notifications.
+ * - Dark theme with separated rows and rounded corners.
+ * - Requires min-width to maintain proper column layout.
+ */
 .notification-table {
     width: 100%;
     border-collapse: separate;
@@ -44,7 +62,9 @@
     overflow: hidden;
 }
 
-/* Headers */
+/**
+ * Styles table headers with centered, uppercase text and soft dividers.
+ */
 .notification-table thead th {
     background-color: #142030;
     padding: 14px;
@@ -56,7 +76,9 @@
     border-bottom: 1px solid #374151;
 }
 
-/* Rows */
+/**
+ * Basic styling for table rows with hover highlight effect.
+ */
 .notification-table tbody tr {
     transition: background-color 0.2s ease;
 }
@@ -65,6 +87,9 @@
     background-color: #374151;
 }
 
+/**
+ * Styles each cell with consistent padding and text formatting.
+ */
 .notification-table td {
     padding: 14px;
     text-align: center;
@@ -73,7 +98,10 @@
     border-bottom: 1px solid #374151;
 }
 
-/* See all button */
+/**
+ * Button to toggle between expanded/collapsed view.
+ * - Uses a vibrant blue background with smooth hover effects.
+ */
 .see-all-btn {
     margin-top: 16px;
     padding: 10px 20px;
@@ -91,6 +119,10 @@
     transform: translateY(-2px);
 }
 
+/**
+ * Special styling for unread rows.
+ * - Darker background and glowing animation for visual attention.
+ */
 .unread-notification {
     background-color: #2d3748;
     font-weight: 600;
@@ -98,6 +130,11 @@
     animation: glow 0.5s ease-in-out infinite alternate;
 }
 
+/**
+ * @keyframes glow
+ * Looping glow effect for unread notifications.
+ * - Increases box shadow brightness back and forth.
+ */
 @keyframes glow {
     0% {
         box-shadow: 0 0 5px #3b82f6;

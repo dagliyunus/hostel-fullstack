@@ -1,10 +1,9 @@
-
-
-/* =======================
-   Dashboard Layout Styles
-   ======================= */
-
-/* Main dashboard container padding adjustment */
+/**
+ * Main wrapper for the admin dashboard layout.
+ * - Uses flex layout to horizontally arrange the sidebar and main content.
+ * - Occupies full viewport width and height.
+ * - Hides any overflowing content to prevent scrollbar issues.
+ */
 .admin-dashboard-container {
     display: flex;
     height: 100vh;
@@ -12,7 +11,13 @@
     overflow: hidden;
 }
 
-/* Ensuring main content respects sidebar width */
+/**
+ * Main content area inside the dashboard.
+ * - Expands to fill available space using `flex-grow: 1`.
+ * - Includes padding for spacing and sets a dark background theme.
+ * - Enables vertical scrolling if content overflows.
+ * - Uses flex layout for internal content stacking and alignment.
+ */
 .dashboard-content {
     flex-grow: 1;
     padding: 30px;
@@ -24,6 +29,13 @@
     align-items: center;
 }
 
+/**
+ * Inner grid used to organize dashboard modules (e.g. cards, tables).
+ * - Constrains width for large screens with max-width of 1750px.
+ * - Provides internal padding and left-aligned margin to account for sidebar.
+ * - Uses column flex layout with spacing between child items.
+ * - NOTE: Negative gap (-5px) is not standard and may not render properly in all browsers.
+ */
 .dashboard-grid {
     width: 100%;
     max-width: 1750px;

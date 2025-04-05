@@ -2,6 +2,24 @@ import React, { useState } from 'react';
 import '../../styles/global/RoomShowcase.css';
 import { motion as Motion } from 'framer-motion';
 
+/**
+ * Room data used for rendering the room showcase.
+ *
+ * @typedef {Object} Room
+ * @property {string} number - Unique identifier for the room (e.g., RN1).
+ * @property {string} type - Human-readable room type (e.g., "2-Bed Room").
+ * @property {string} capacity - Maximum occupancy (e.g., "2 Guests").
+ * @property {string} beds - Bed configuration in the room.
+ * @property {number} price - Price per night in euros.
+ * @property {string} image - Path to the image representing the room.
+ * @property {string} description - Detailed description of the room.
+ */
+
+/**
+ * Array of available rooms for booking.
+ * Used to populate the Room Showcase UI with relevant data.
+ * @type {Room[]}
+ */
 const rooms = [
     {
         number: 'RN1',
@@ -32,9 +50,23 @@ const rooms = [
     }
 ];
 
+/**
+ * RoomShowcase Component
+ *
+ * Displays a list of available rooms with interactive animations and modals.
+ * Allows users to view detailed room info or scroll to the booking section with pre-selected room.
+ *
+ * @component
+ * @returns {JSX.Element} A section with animated room cards and modals for detailed viewing.
+ */
 const RoomShowcase = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
 
+    /**
+     * Scrolls the user to the booking section and stores the selected room number in sessionStorage.
+     *
+     * @param {string} roomNumber - The selected room's number (e.g., RN1, RN2).
+     */
     const scrollToBookingSection = (roomNumber) => {
         sessionStorage.setItem("selectedRoom", roomNumber);
         const bookingSection = document.getElementById("booking");

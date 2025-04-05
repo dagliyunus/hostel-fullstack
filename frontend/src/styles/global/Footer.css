@@ -1,5 +1,11 @@
-/* Footer.css */
-
+/**
+ * Main footer container.
+ *
+ * - Light gray background for separation from main content.
+ * - Generous padding for spacing.
+ * - Uses 'Poppins' font for modern aesthetic.
+ * - Default text color is dark gray.
+ */
 .footer {
     background-color: #f3f3f3;
     padding: 3rem 2rem 1.5rem;
@@ -7,6 +13,14 @@
     color: #333;
 }
 
+/**
+ * Flex container for footer content columns.
+ *
+ * - Responsive layout using `flex-wrap`.
+ * - `justify-content: space-between` evenly spaces each column.
+ * - Applies max width and centers horizontally.
+ * - Gap between columns for spacing.
+ */
 .footer-columns {
     display: flex;
     flex-wrap: wrap;
@@ -16,12 +30,24 @@
     margin: 0 auto;
 }
 
+/**
+ * Section title styling within each footer column.
+ *
+ * - Medium font size and spacing for clear hierarchy.
+ * - Darker color for contrast.
+ */
 .footer-section h4 {
     font-size: 1.2rem;
     margin-bottom: 0.8rem;
     color: #000;
 }
 
+/**
+ * Shared styles for paragraph and link elements in the footer.
+ *
+ * - Smaller font for compact design.
+ * - Links inherit font color and remove underline by default.
+ */
 .footer-section p,
 .footer-section a {
     font-size: 0.95rem;
@@ -29,11 +55,24 @@
     text-decoration: none;
 }
 
+/**
+ * Link hover effect.
+ *
+ * - Changes color to primary blue.
+ * - Underline added for emphasis.
+ */
 .footer-section a:hover {
     color: #007BFF;
     text-decoration: underline;
 }
 
+/**
+ * Styles for social media links/icons.
+ *
+ * - Slight right margin for spacing.
+ * - Larger font size for icon visibility.
+ * - Smooth color transition on hover.
+ */
 .social-icons a {
     margin-right: 0.75rem;
     color: #333;
@@ -41,10 +80,22 @@
     transition: color 0.3s ease;
 }
 
+/**
+ * Hover state for social icons.
+ *
+ * - Highlights icon with primary color.
+ */
 .social-icons a:hover {
     color: #007BFF;
 }
 
+/**
+ * Bottom bar of the footer.
+ *
+ * - Contains copyright or secondary links.
+ * - Separated by top border.
+ * - Uses flex layout for spacing and alignment.
+ */
 .footer-bottom {
     border-top: 1px solid #ddd;
     margin-top: 2rem;
@@ -58,6 +109,12 @@
     margin-right: auto;
 }
 
+/**
+ * Link/button styled for admin login access.
+ *
+ * - Light gray color and slightly larger text.
+ * - Interactive color change on hover.
+ */
 .admin-login {
     color: #ccc;
     font-size: 1.2rem;

@@ -1,10 +1,22 @@
-/* GalleryTestimonials.css */
-
+/**
+ * Main container for both gallery and testimonial sections.
+ *
+ * - Adds vertical padding for spacing.
+ * - Uses background color via CSS variable (--bg-color) for theme flexibility.
+ */
 .gallery-testimonials {
     padding: 4rem 2rem;
     background-color: var(--bg-color);
 }
 
+/**
+ * Section header style for both gallery and testimonials.
+ *
+ * - Large font size for emphasis.
+ * - Centered alignment for symmetry.
+ * - Margin for spacing below the title.
+ * - Uses clean, modern font.
+ */
 .section-title {
     font-size: 2.5rem;
     text-align: center;
@@ -13,6 +25,13 @@
     color: #222;
 }
 
+/**
+ * Responsive grid layout for displaying images.
+ *
+ * - Automatically adjusts column count based on screen width.
+ * - Ensures minimum column width for image clarity.
+ * - Adds spacing between items using `gap`.
+ */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -20,6 +39,14 @@
     margin-bottom: 4rem;
 }
 
+/**
+ * Styles for individual gallery images.
+ *
+ * - Fills entire grid cell.
+ * - Fixed height with cover scaling.
+ * - Rounded corners and soft shadow for visual depth.
+ * - Slight scale effect on hover to enhance interactivity.
+ */
 .gallery-image {
     width: 100%;
     height: 200px;
@@ -33,11 +60,22 @@
     transform: scale(1.03);
 }
 
+/**
+ * Container for all testimonials.
+ *
+ * - Centers content and limits max width for readability.
+ */
 .testimonials {
     max-width: 900px;
     margin: 0 auto;
 }
 
+/**
+ * Vertical stack layout for testimonial cards.
+ *
+ * - Uses flexbox with column direction.
+ * - Adds vertical space between testimonial cards.
+ */
 .testimonial-list {
     display: flex;
     flex-direction: column;
@@ -45,6 +83,13 @@
     margin-top: 2rem;
 }
 
+/**
+ * Card-style container for individual testimonials.
+ *
+ * - White background with padding and shadow.
+ * - Rounded corners for modern look.
+ * - Centered content.
+ */
 .testimonial-card {
     background-color: white;
     border-radius: 1rem;
@@ -53,6 +98,12 @@
     text-align: center;
 }
 
+/**
+ * Text content of a testimonial.
+ *
+ * - Slightly larger font with italic style.
+ * - Gray color for subtlety.
+ */
 .testimonial-text {
     font-size: 1.1rem;
     color: #555;
@@ -60,24 +111,46 @@
     font-style: italic;
 }
 
+/**
+ * Name of the person who gave the testimonial.
+ *
+ * - Emphasized using font weight and a modern font.
+ */
 .testimonial-name {
     font-weight: 600;
     color: #333;
     font-family: 'Poppins', sans-serif;
 }
 
+/**
+ * Horizontal scrolling section for gallery images.
+ *
+ * - Hides overflow and sets padding around carousel.
+ */
 .gallery-carousel {
     overflow: hidden;
     width: 100%;
     padding: 1rem 0;
 }
 
+/**
+ * Container for carousel items (scrolling gallery).
+ *
+ * - Uses flex layout for horizontal scrolling.
+ * - Animates the movement infinitely from right to left.
+ */
 .gallery-track {
     display: flex;
     animation: scrollGallery 30s linear infinite;
     width: fit-content;
 }
 
+/**
+ * Overrides previous .gallery-image for carousel-specific sizing and spacing.
+ *
+ * - Fixed width and height for consistency.
+ * - Prevents shrinking, applies spacing and styling.
+ */
 .gallery-image {
     width: 300px;
     height: 200px;
@@ -88,6 +161,12 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/**
+ * Animation for auto-scrolling the gallery horizontally.
+ *
+ * - Moves content to the left over time.
+ * - Creates an infinite scroll loop effect.
+ */
 @keyframes scrollGallery {
     0% {
         transform: translateX(0);

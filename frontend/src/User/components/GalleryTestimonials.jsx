@@ -2,6 +2,11 @@ import React from 'react';
 import '../../styles/global/GalleryTestimonials.css';
 import { motion as Motion } from 'framer-motion';
 
+/**
+ * An array of image paths used in the hostel's gallery carousel.
+ *
+ * @constant {string[]}
+ */
 const galleryImages = [
     '/public/reservation.jpg',
     '/public/common.jpg',
@@ -9,6 +14,15 @@ const galleryImages = [
     '/public/kitchen.jpg',
 ];
 
+/**
+ * Array of guest testimonials for the hostel.
+ *
+ * Each testimonial contains:
+ * - `name` {string}: Name of the guest providing the feedback.
+ * - `text` {string}: The review or feedback content.
+ *
+ * @constant {{ name: string, text: string }[]}
+ */
 const testimonials = [
     {
         name: 'Lina M.',
@@ -20,6 +34,21 @@ const testimonials = [
     },
 ];
 
+/**
+ * `GalleryTestimonials` Component
+ *
+ * Renders a combined section for:
+ * 1. A horizontally scrolling gallery of hostel images.
+ * 2. A series of testimonials with entrance animations.
+ *
+ * Features:
+ * - Gallery uses duplicated image array for seamless looped scrolling effect.
+ * - Testimonials animate into view on scroll using Framer Motion.
+ * - Includes semantic headings and responsive layout with appropriate CSS class hooks.
+ *
+ * @component
+ * @returns {JSX.Element} Rendered gallery and testimonials section.
+ */
 const GalleryTestimonials = () => {
     return (
         <section className="gallery-testimonials">

@@ -1,3 +1,10 @@
+/**
+ * .admin-login-container
+ * - Acts as the full-page wrapper for the login form.
+ * - Uses flexbox to center content both vertically and horizontally.
+ * - Sets a linear background gradient and applies padding for spacing.
+ * - Font stack ensures consistent rendering across platforms.
+ */
 .admin-login-container {
     width: 100vw;
     height: 100vh;
@@ -9,6 +16,12 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/**
+ * .admin-login-form
+ * - The card that wraps the login form content.
+ * - Styled with a white background, soft shadow, and rounded corners.
+ * - Uses flexbox column layout with spacing and transition effects.
+ */
 .admin-login-form {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -22,10 +35,18 @@
     transition: box-shadow 0.3s ease;
 }
 
+/**
+ * .admin-login-form:hover
+ * - Enhances box shadow on hover for subtle interaction feedback.
+ */
 .admin-login-form:hover {
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
 }
 
+/**
+ * .admin-login-form h2
+ * - Styles the login form title.
+ */
 .admin-login-form h2 {
     color: #111827;
     margin-bottom: 32px;
@@ -34,6 +55,12 @@
     font-weight: 600;
 }
 
+/**
+ * .admin-login-form input
+ * - Styles all input fields.
+ * - Applies consistent padding, background color, and rounded edges.
+ * - Includes smooth transition for focus state.
+ */
 .admin-login-form input {
     background-color: #f9fafb;
     border: 1px solid #d1d5db;
@@ -45,6 +72,10 @@
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+/**
+ * .admin-login-form input:focus
+ * - Adds visual cues for focused inputs with blue border and glow.
+ */
 .admin-login-form input:focus {
     outline: none;
     background-color: #ffffff;
@@ -52,10 +83,20 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
+/**
+ * .admin-login-form input::placeholder
+ * - Styles placeholder text with muted color.
+ */
 .admin-login-form input::placeholder {
     color: #9ca3af;
 }
 
+/**
+ * .admin-login-form button
+ * - Primary action button styling.
+ * - Blue gradient background with bold white text and rounded corners.
+ * - Adds hover scaling for interaction feedback.
+ */
 .admin-login-form button {
     padding: 14px;
     background: linear-gradient(to right, #3b82f6, #2563eb);
@@ -68,11 +109,20 @@
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
+/**
+ * .admin-login-form button:hover
+ * - Slightly darkens the gradient and enlarges the button on hover.
+ */
 .admin-login-form button:hover {
     background: linear-gradient(to right, #2563eb, #1d4ed8);
     transform: scale(1.02);
 }
 
+/**
+ * .admin-login-form .error
+ * - Error message styling.
+ * - Red color, centered text, and emphasized for visibility.
+ */
 .admin-login-form .error {
     color: #ef4444;
     text-align: center;

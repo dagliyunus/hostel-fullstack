@@ -2,6 +2,22 @@ import React from 'react';
 import '../../styles/global/Footer.css';
 import { FaInstagram, FaFacebookF, FaTwitter,  FaUserShield } from 'react-icons/fa';
 
+/**
+ * Footer component for the application.
+ *
+ * This component renders the website's footer section, which includes:
+ * - Contact information (email and phone)
+ * - Social media links (Instagram, Facebook, Twitter)
+ * - Legal links (Privacy Policy and Terms of Service)
+ * - Copyright
+ * - Admin login access icon
+ *
+ * Uses font icons from `react-icons` (e.g., `FaInstagram`, `FaFacebookF`, `FaTwitter`, `FaUserShield`)
+ * and is styled via external CSS classes (`footer`, `footer-columns`, etc.).
+ *
+ * @component
+ * @returns {JSX.Element} Rendered footer element.
+ */
 const Footer = () => {
     return (
         <footer className="footer">

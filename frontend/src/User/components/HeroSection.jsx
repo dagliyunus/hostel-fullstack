@@ -3,11 +3,46 @@ import '../../styles/global/HeroSection.css';
 import { motion as Motion } from 'framer-motion';
 import { FaArrowDown } from 'react-icons/fa';
 
+/**
+ * HeroSection Component
+ *
+ * Displays the full-page hero section with background, headline, subtitle,
+ * group booking prompt, and a booking form for check-in, check-out, and guest selection.
+ *
+ * Props:
+ * @param {Function} setSearchCriteria - Callback function to pass the user's selected booking data (check-in, check-out, guests) to the parent component.
+ *
+ * State:
+ * @state {string} checkIn - The selected check-in date.
+ * @state {string} checkOut - The selected check-out date.
+ * @state {number} guests - The number of guests (minimum 1).
+ *
+ * Functionality:
+ * - Handles form submission by preventing default form behavior.
+ * - Passes form data to `setSearchCriteria` to trigger a room availability search.
+ * - Smooth-scrolls the page to the booking section when the form is submitted.
+ *
+ * Visual Features:
+ * - Animated content with Framer Motion.
+ * - Styled background with fixed image and scroll cue icon.
+ * - Group booking promotion card with hover effect.
+ *
+ * @component
+ * @returns {JSX.Element} Rendered hero section including booking form and animations.
+ */
 const HeroSection = ({ setSearchCriteria }) => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [guests, setGuests] = useState(1);
 
+    /**
+     * Handles form submission:
+     * - Prevents page reload
+     * - Sends user input to the parent via `setSearchCriteria`
+     * - Scrolls to booking section
+     *
+     * @param {React.FormEvent<HTMLFormElement>} e - Form submit event
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         setSearchCriteria({ checkIn, checkOut, guests });

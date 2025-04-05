@@ -1,3 +1,11 @@
+/**
+ * Main container for the contact form UI.
+ *
+ * Layout & Design:
+ * - Max width limits layout to 800px centered horizontally with vertical spacing.
+ * - White background with rounded corners and shadow for modern card design.
+ * - Applies fade-in-up animation on load and slight lift effect on hover.
+ */
 .contact-form-container {
     max-width: 800px;
     margin: 100px auto;
@@ -15,6 +23,11 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 }
 
+/**
+ * Heading inside contact form.
+ *
+ * - Large bold blue title centered at the top.
+ */
 .contact-form-container h2 {
     margin-bottom: 2rem;
     text-align: center;
@@ -23,11 +36,22 @@
     color: #1d4ed8;
 }
 
+/**
+ * Form layout inside the contact form.
+ *
+ * - Uses vertical stacking of form elements.
+ */
 .contact-form-container form {
     display: flex;
     flex-direction: column;
 }
 
+/**
+ * Styles for all input and textarea elements.
+ *
+ * - Padding, light background, rounded corners, subtle borders.
+ * - Placeholder and focus states included for visual consistency.
+ */
 .contact-form-container input,
 .contact-form-container textarea {
     margin-bottom: 1.5rem;
@@ -42,11 +66,17 @@
     width: 100%;
 }
 
+
 .contact-form-container input::placeholder,
 .contact-form-container textarea::placeholder {
     color: #9ca3af;
 }
 
+/**
+ * Focus state for input and textarea.
+ *
+ * - Highlights border and background.
+ */
 .contact-form-container input:focus,
 .contact-form-container textarea:focus {
     outline: none;
@@ -55,6 +85,12 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
+/**
+ * Textarea-specific adjustments.
+ *
+ * - Prevents horizontal resizing.
+ * - Sets min and max height for consistent layout.
+ */
 .contact-form-container textarea {
     resize: vertical; /* Prevent horizontal stretching */
     max-height: 200px; /* Optional: keep it neat */
@@ -62,6 +98,11 @@
     min-height: 120px;
 }
 
+/**
+ * Submit button styling.
+ *
+ * - Blue gradient background, rounded edges, shadow, hover scale.
+ */
 .contact-form-container button {
     padding: 14px;
     background: linear-gradient(90deg, #3b82f6, #2563eb);
@@ -80,6 +121,11 @@
     transform: scale(1.02);
 }
 
+/**
+ * Success message display below the form.
+ *
+ * - Green text, centered, fades in on appearance.
+ */
 .success-message {
     margin-top: 1rem;
     text-align: center;
@@ -88,6 +134,12 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
+
+/**
+ * @keyframes fadeInUp
+ * Used for initial form animation:
+ * - Starts from below and fades into view.
+ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -99,6 +151,10 @@
     }
 }
 
+/**
+ * @keyframes fadeIn
+ * Generic fade-in used for success message.
+ */
 @keyframes fadeIn {
     from {
         opacity: 0;

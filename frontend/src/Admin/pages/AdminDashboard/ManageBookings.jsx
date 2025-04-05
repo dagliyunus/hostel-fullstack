@@ -7,6 +7,40 @@ import {
     deleteBooking
 } from '../../services/AdminServices/bookingService.js';
 
+/**
+ * ManageBookings component is the admin interface for managing hotel bookings.
+ *
+ * @component
+ * @returns {JSX.Element} A React component that displays booking records and provides UI to add, edit, or delete them.
+ *
+ * @description
+ * This component allows administrators to:
+ * - View a list of all bookings using the BookingTable component.
+ * - Add new bookings via a popup form with full customer and room details.
+ * - Edit existing bookings using a modal popup.
+ * - Delete bookings with confirmation and automatic refresh.
+ *
+ * Features:
+ * - Fetches all bookings on component mount using `getAllBookings`.
+ * - Uses `useState` to manage UI states like loading, popups, and booking form data.
+ * - Handles data submission for both creation and editing of bookings via service functions.
+ * - Performs optimistic UI updates and forces a reload to sync state.
+ *
+ * State Variables:
+ * - `bookings` (array): All bookings pulled from the backend.
+ * - `loading` (boolean): Indicator for fetch operation status.
+ * - `showAddPopup` (boolean): Toggles visibility of the add-booking popup.
+ * - `showEditPopup` (boolean): Toggles visibility of the edit-booking popup.
+ * - `newBooking` (object): Contains the input values for creating a booking.
+ * - `editingBooking` (object|null): Holds the selected booking being edited.
+ *
+ * Related Service Methods:
+ * - `getAllBookings()`: Fetches all bookings.
+ * - `createBooking(payload)`: Submits a new booking.
+ * - `updateBooking(booking)`: Updates an existing booking.
+ * - `deleteBooking(id)`: Deletes a booking by ID.
+ */
+
 const ManageBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,9 +49,9 @@ const ManageBookings = () => {
     const [newBooking, setNewBooking] = useState({
         customerFirstName: '',
         customerLastName: '',
-        customerEmail: '',       // ✅ Add
-        customerPhone: '',       // ✅ Add
-        customerDateOfBirth: '', // ✅ Add (use type="date")
+        customerEmail: '',
+        customerPhone: '',
+        customerDateOfBirth: '',
         roomNumber: '',
         checkInDate: '',
         checkOutDate: '',
@@ -29,8 +63,8 @@ const ManageBookings = () => {
         const fetchBookings = async () => {
             try {
                 const response = await getAllBookings();
-                console.log("Full Booking API response:", response.data);      // 👀
-                console.log("Booking response data:", response.data);     // 👀
+                console.log("Full Booking API response:", response.data);
+                console.log("Booking response data:", response.data);
                 const data = Array.isArray(response.data) ? response.data : [];
                 setBookings(data);
             } catch (error) {
@@ -135,7 +169,7 @@ const ManageBookings = () => {
                     />
             )}
 
-            {/* ➕ Add Booking Popup */}
+            {/*  Add Booking Popup */}
             {showAddPopup && (
                 <div className="popup">
                     <div className="popup-content">
@@ -197,7 +231,7 @@ const ManageBookings = () => {
                 </div>
             )}
 
-            {/* ✏️ Edit Booking Popup */}
+            {/*  Edit Booking Popup */}
             {showEditPopup && editingBooking && (
                 <div className="popup">
                     <div className="popup-content">

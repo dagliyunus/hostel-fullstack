@@ -3,6 +3,18 @@ import '../../styles/global/ServiceHighlights.css';
 import { motion as Motion } from 'framer-motion';
 import {FaWifi, FaShower, FaCoffee, FaLock, FaAddressBook} from 'react-icons/fa';
 
+/**
+ * @typedef {Object} Service
+ * @property {JSX.Element} icon - The icon component representing the service.
+ * @property {string} label - The descriptive label for the service.
+ */
+
+/**
+ * Array of core services offered by the hostel.
+ * Each service includes an icon and a textual label.
+ *
+ * @type {Service[]}
+ */
 const services = [
     { icon: <FaWifi />, label: 'Free Wi-Fi' },
     { icon: <FaShower />, label: 'Laundry' },
@@ -11,6 +23,16 @@ const services = [
     { icon: <FaAddressBook />, label: 'Anmeldung' },
 ];
 
+/**
+ * ServiceHighlights Component
+ *
+ * Displays a grid of highlighted services provided by the hostel,
+ * such as Wi-Fi, breakfast, laundry, lockers, and Anmeldung support.
+ * Uses framer-motion to animate service cards on scroll into view.
+ *
+ * @component
+ * @returns {JSX.Element} A section containing animated service cards.
+ */
 const ServiceHighlights = () => {
     return (
         <section className="service-highlights">

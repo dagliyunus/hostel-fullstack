@@ -2,13 +2,41 @@ import React, { useState, useEffect } from "react";
 import { getAllNotifications, markAsRead } from "../../services/AdminServices/notificationService";
 import "../../../styles/admin/dashboard/notification.css";
 
+/**
+ * Notification is a React component that displays system-generated booking notifications in a table format.
+ *
+ * @component
+ * @returns {JSX.Element} Renders a list of notifications with the ability to mark them as read and toggle visibility.
+ *
+ * @description
+ * Features:
+ * - Fetches all notifications on component mount using `getAllNotifications()`.
+ * - Displays up to 5 most recent notifications by default, with the option to "See All".
+ * - Each notification includes booking-related details such as customer, room, bed, and payment.
+ * - Automatically marks notifications as read when clicked if they are currently unread.
+ * - Timestamps are formatted into human-readable "time ago" strings using a custom `timeAgo()` utility.
+ *
+ * State Variables:
+ * - `notifications` (Array): List of fetched notification objects.
+ * - `loading` (boolean): Indicates whether notifications are being loaded.
+ * - `error` (string|null): Stores error message in case of fetch failure.
+ * - `showAll` (boolean): Toggles between collapsed and full list view.
+ *
+ * Helper Functions:
+ * - `fetchNotifications()`: Asynchronously retrieves notifications and sets local state.
+ * - `handleMarkAsRead(id)`: Marks a notification as read and updates the UI accordingly.
+ * - `timeAgo(timestamp)`: Formats a date timestamp into a "x minutes/hours/days ago" string.
+ *
+ * Dependencies:
+ * - `getAllNotifications`, `markAsRead` from `notificationService`.
+ * - External stylesheet for styling: `notification.css`.
+ */
 const Notification = () => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showAll, setShowAll] = useState(false);
 
-    // 🔁 Fetch on mount
     useEffect(() => {
         fetchNotifications();
     }, []);
@@ -26,7 +54,6 @@ const Notification = () => {
         }
     };
 
-    // ✅ Mark as read & update local state without re-fetch
     const handleMarkAsRead = async (id) => {
         try {
             await markAsRead(id);
@@ -58,7 +85,7 @@ const Notification = () => {
     return (
         <div className="notification-wrapper">
             <div className="notification-header">
-                <h3>📌 Notifications</h3>
+                <h3> Notifications</h3>
             </div>
 
             {loading ? (

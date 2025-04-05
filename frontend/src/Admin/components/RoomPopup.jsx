@@ -1,29 +1,22 @@
 import React from 'react';
 
 /**
- * RoomPopup component is a modal-style UI element used to display detailed information
- * about a specific room within the admin dashboard. This includes metadata like ID,
- * room number, capacity, and floor, as well as an interactive list of beds assigned
- * to that room.
+ * RoomPopup component displays a modal window with details about a specific room,
+ * including its properties and associated beds. It allows adding or deleting beds from the room.
  *
- * Admins can use this popup to:
- * - Review room details fetched from the backend via the `getRoomWithBeds` endpoint.
- * - View all beds within the room.
- * - Perform bed-level CRUD operations (Add, Update, Delete) using dedicated handler buttons.
- *
- * @param {{
- *   room: {
- *     roomId: string,
- *     roomNumber: string,
- *     capacity: number,
- *     floor: number,
- *     beds: Array<{ bedNumber: string }>
- *   },
- *   onClose: Function,
- *   onAddBedForPopup: Function,
- *   onUpdateBedForPopup: Function,
- *   onDeleteBedForPopup: Function
- * }} props - Props passed down from the ManageRooms component to render the selected room.
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.room - Room object containing details to display.
+ * @param {string} props.room.roomId - Unique identifier of the room.
+ * @param {string|number} props.room.roomNumber - Number of the room.
+ * @param {number} props.room.capacity - Capacity of the room.
+ * @param {number} props.room.floor - Floor number where the room is located.
+ * @param {Array<Object>} [props.room.beds] - Optional list of beds in the room.
+ * @param {string|number} props.room.beds[].bedNumber - Number assigned to a specific bed.
+ * @param {function} props.onClose - Callback to close the popup.
+ * @param {function} props.onAddBedForPopup - Callback triggered to add a bed to the room.
+ * @param {function} props.onDeleteBedForPopup - Callback triggered to delete a bed from the room.
+ * @returns {JSX.Element|null} A JSX modal element displaying the room details or null if no room is provided.
  */
 const RoomPopup = ({ room, onClose, onAddBedForPopup, onDeleteBedForPopup }) => {
     if (!room) return null;

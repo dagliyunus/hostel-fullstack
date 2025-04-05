@@ -1,5 +1,13 @@
-/* HeroSection.css */
-
+/**
+ * .hero-section
+ * --------------
+ * Primary full-screen hero container.
+ *
+ * - Uses flexbox to center content both vertically and horizontally.
+ * - Covers the entire viewport (100vh height).
+ * - Applies a CSS variable for background color for theme flexibility.
+ * - Sets font to 'Poppins' for a clean and modern look.
+ */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -12,6 +20,16 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/**
+ * .hero-bg
+ * ---------
+ * Background image layer for the hero section.
+ *
+ * - Stretches to fill the full screen.
+ * - Uses fixed background attachment for parallax effect.
+ * - Applies brightness filter to darken the image.
+ * - Positioned behind content using z-index.
+ */
 .hero-bg {
     position: absolute;
     top: 0;
@@ -26,6 +44,14 @@
     z-index: 1;
 }
 
+/**
+ * .hero-content
+ * --------------
+ * Text content layer within hero section.
+ *
+ * - Positioned above the background using z-index.
+ * - Center-aligned white text for readability.
+ */
 .hero-content {
     position: relative;
     z-index: 2;
@@ -33,18 +59,42 @@
     color: white;
 }
 
+/**
+ * .hero-title
+ * ------------
+ * Main heading in hero section.
+ *
+ * - Large, bold font for prominence.
+ * - Slight spacing below the title.
+ */
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
+/**
+ * .hero-subtitle
+ * ---------------
+ * Subheading below the hero title.
+ *
+ * - Smaller and lighter than the main title.
+ * - Adds bottom margin to separate from the booking form.
+ */
 .hero-subtitle {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 2rem;
 }
 
+/**
+ * .booking-form
+ * --------------
+ * Flex container for form inputs and buttons.
+ *
+ * - Horizontal layout with wrapping support.
+ * - Even spacing between elements.
+ */
 .booking-form {
     display: flex;
     gap: 1rem;
@@ -52,6 +102,14 @@
     flex-wrap: wrap;
 }
 
+/**
+ * .booking-form input, button
+ * ----------------------------
+ * Common styling for inputs and buttons in the form.
+ *
+ * - Padding and border-radius for UX.
+ * - Consistent font size.
+ */
 .booking-form input,
 .booking-form button {
     padding: 0.75rem 1rem;
@@ -60,12 +118,28 @@
     font-size: 1rem;
 }
 
+/**
+ * .booking-form input
+ * ---------------------
+ * Input field styling.
+ *
+ * - Light background and dark text.
+ * - Fixed width for layout consistency.
+ */
 .booking-form input {
     background: #fff;
     color: #333;
     width: 180px;
 }
 
+/**
+ * .booking-form button
+ * ----------------------
+ * Button styling for booking submission.
+ *
+ * - Yellow background with black text.
+ * - Hover effect for better interaction feedback.
+ */
 .booking-form button {
     background-color: #ffc107;
     color: #000;
@@ -77,6 +151,14 @@
     background-color: #ffb300;
 }
 
+/**
+ * .scroll-down-cue
+ * ------------------
+ * Decorative scroll cue positioned at the bottom of the hero section.
+ *
+ * - Uses transform to center horizontally.
+ * - Higher z-index to appear above background.
+ */
 .scroll-down-cue {
     position: absolute;
     bottom: 20px;
@@ -85,12 +167,24 @@
     z-index: 2;
 }
 
+/**
+ * .scroll-icon
+ * -------------
+ * Scroll cue icon with animation.
+ *
+ * - White icon with bounce animation.
+ */
 .scroll-icon {
     font-size: 1.5rem;
     color: white;
     animation: bounce 2s infinite;
 }
 
+/**
+ * @keyframes bounce
+ * ------------------
+ * Bouncing animation for scroll cue.
+ */
 @keyframes bounce {
     0%, 100% {
         transform: translateY(0);
@@ -100,10 +194,24 @@
     }
 }
 
+/**
+ * :root
+ * ------
+ * CSS variable declaration for theming.
+ */
 :root {
     --bg-color: rgb(248, 248, 248);
 }
 
+/**
+ * .group-booking-card
+ * ---------------------
+ * Floating information card on the hero section (top-right).
+ *
+ * - Gradient background and modern design with backdrop-filter.
+ * - Box shadow and border for visual depth.
+ * - Responsive text with serif font for elegance.
+ */
 .group-booking-card {
     position: absolute;
     top: 1.5rem;
@@ -127,6 +235,14 @@
     transform: translateY(-2px);
 }
 
+/**
+ * .group-text
+ * ------------
+ * Text inside the group booking card.
+ *
+ * - Smaller font for compact layout.
+ * - Styled `<strong>` and `<a>` elements for emphasis and interaction.
+ */
 .group-booking-card .group-text {
     margin: 0;
     font-size: 0.95rem;

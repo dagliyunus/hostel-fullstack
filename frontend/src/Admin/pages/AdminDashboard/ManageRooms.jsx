@@ -6,21 +6,40 @@ import { createRoomWithBeds } from '../../services/AdminServices/roomService.js'
 import RoomPopup from '../../components/RoomPopup.jsx';
 
 /**
- * React functional component for managing hostel rooms on the Admin Dashboard.
+ * ManageRooms is an administrative React component used to manage room and bed data.
  *
- * This component:
- * - Fetches all room data from the backend when it mounts
- * - Displays the list of rooms via the <RoomTable /> component
- * - Shows a detailed popup view of a selected room, including its beds
- * - Allows admins to open a form to create new rooms (with bed count)
+ * @component
+ * @returns {JSX.Element} Renders the full interface for creating, updating, viewing, and deleting rooms and beds.
  *
- * State variables used:
- * - `rooms`: Holds the list of all rooms retrieved from the backend
- * - `loading`: Indicates whether data is still being fetched
- * - `selectedRoom`: Stores the room selected for viewing in the popup
- * - `showPopup`: Controls whether the RoomPopup component is shown
- * - `showCreateForm`: Toggles the display of the "Create Room" form
- * - `newRoomData`: Temporarily holds the input data for creating a new room
+ * @description
+ * This component serves as the UI for administrators to handle room-related operations such as:
+ * - Creating new rooms with a specified number of beds.
+ * - Viewing room details along with associated beds in a modal.
+ * - Editing room details including room number, floor, and capacity.
+ * - Deleting rooms with confirmation.
+ * - Dynamically adding beds to rooms through a form.
+ *
+ * State Variables:
+ * - `rooms` (Array): List of room objects fetched from the backend.
+ * - `beds` (Array): List of beds associated with a selected room.
+ * - `loading` (boolean): Indicates loading state during data fetch.
+ * - `selectedRoom` (Object|null): Currently selected room for popup display.
+ * - `showPopup`, `showCreateForm`, `showUpdateForm`, `showAddBedForm` (boolean): Controls popup/form visibility.
+ * - `newRoomData` (Object): Stores input values for new room creation.
+ * - `updatedRoomData` (Object): Holds values for updating an existing room.
+ * - `bedData` (Object): Used when adding a new bed to a room.
+ *
+ * Functions:
+ * - `onView(roomId)`: Loads and displays room and bed details.
+ * - `onAdd()`: Handles UI toggle and submission of new room data.
+ * - `onDelete(roomId)`: Deletes a room after confirmation.
+ * - `onEdit(roomId)`: Prepares and submits room update data.
+ * - `handleAddBedForPopup(roomId)`: Manages form visibility and submission for bed creation.
+ * - `handleDeleteBedForPopup(roomId)`: Placeholder for future bed deletion feature.
+ *
+ * Dependencies:
+ * - RoomTable, RoomPopup components.
+ * - roomService methods: getAllRooms, getRoomWithBeds, createRoomWithBeds, updateRoom, deleteRoom, addBedToRoom, getBedsByRoomId.
  */
 const ManageRooms = () => {
     const [rooms, setRooms] = useState([]);
@@ -50,16 +69,6 @@ const ManageRooms = () => {
 
 
 
-   /**
-    * Handles the action when the "View" button is clicked for a room.
-    *
-    * This function:
-    * - Calls the backend endpoint to fetch room details along with its beds using `getRoomWithBeds`.
-    * - If successful, sets the selected room data to state and triggers the RoomPopup to appear.
-    * - If it fails, logs the error for debugging purposes.
-    *
-    * @param {string} roomId - The ID of the room to be viewed.
-    */
    const onView = async (roomId) => {
         try {
             const response = await getRoomWithBeds(roomId);
@@ -72,15 +81,7 @@ const ManageRooms = () => {
         }
     };
 
-   /**
-    * Handles the "Add Room" functionality when the Add button is clicked.
-    *
-    * This function has two phases:
-    * - First click: toggles the form display by setting `showCreateForm` to true.
-    * - Second click: collects form input (`newRoomData`), sends it to the backend using `createRoomWithBeds`,
-    *   and if successful, resets form state, refetches all rooms, and hides the form.
-    * - Errors during submission are caught and logged, with a user alert for failure.
-    */
+
     const onAdd = async () => {
         if (!showCreateForm) {
             setShowCreateForm(true); // First click: show the form
@@ -105,13 +106,7 @@ const ManageRooms = () => {
         }
     };
 
-    /**
-     * Deletes a room by its ID.
-     * Prompts the admin for confirmation, sends a DELETE request via API,
-     * and updates the local room list upon success.
-     *
-     * @param {string} roomId - The ID of the room to be deleted (e.g., "R1")
-     */
+
     const onDelete = async (roomId) => {
         const confirmDelete = window.confirm(`Are you sure you want to delete Room ID: ${roomId}?`);
         if (!confirmDelete) return;
@@ -129,21 +124,7 @@ const ManageRooms = () => {
         }
     };
 
-    /**
-     * Handles the editing of a room's details in the admin dashboard.
-     * This method is triggered when the admin clicks "Edit" on a room, and it toggles between showing the edit form and submitting the form data.
-     *
-     * Flow:
-     * 1. If the edit form is not visible (`showUpdateForm` is false), the function first shows the form by setting `setShowUpdateForm(true)`.
-     * 2. It finds the room to be edited by matching the `roomId` from the `rooms` list and sets the initial values in the `updatedRoomData` state.
-     * 3. If the edit form is already visible, it proceeds to submit the form:
-     *    - It constructs an updated room object using the `updatedRoomData` state.
-     *    - Sends the updated room data to the backend via the `updateRoom` API call.
-     *    - If the update is successful, it hides the form and resets the form data.
-     *    - After the successful update, it fetches the latest room list by calling `getAllRooms` to refresh the list of rooms displayed in the UI.
-     *
-     * @param {string} roomId - The ID of the room to be updated.
-     */
+
     const onEdit = async (roomId) => {
         if (!showUpdateForm) {
             setShowUpdateForm(true); // Show the form
@@ -198,8 +179,8 @@ const ManageRooms = () => {
                 // Set the room details into bedData state
                 setBedData({
                     roomId: roomToAddBed.roomId,
-                    bedId: '',           // Initialize bedId as empty
-                    bedNumber: ''        // Initialize bedNumber as empty
+                    bedId: '',
+                    bedNumber: ''
                 });
             }
         } else {
@@ -244,15 +225,7 @@ const ManageRooms = () => {
         alert(`Deleting bed in popup for Room ID: ${roomId}`);
     };
 
-    /**
-     * useEffect hook to load all room data when the component first mounts.
-     *
-     * This effect runs only once (due to empty dependency array []) and:
-     * - Calls the backend API using getAllRooms() from the service layer
-     * - On success, stores the list of rooms in the `rooms` state
-     * - On failure, logs the error for debugging purposes
-     * - Finally, regardless of success/failure, sets `loading` to false to stop the loading spinner
-     */
+
     useEffect(() => {
         const fetchRooms = async () => {
             try {

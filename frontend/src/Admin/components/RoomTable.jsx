@@ -2,19 +2,20 @@ import React from 'react';
 import '../../styles/admin/managementTables/style.css';
 
 /**
- * RoomTable Component
- *
- * Displays a dynamic HTML table of all hostel rooms provided via props.
- * Each room is rendered as a row containing key attributes like ID, number,
- * capacity, and floor. A set of action buttons is available per room to support
- * future CRUD operations from the admin dashboard.
+ * RoomTable component renders a table listing all rooms with actions to manage each room.
  *
  * @component
- * @param {Object[]} rooms - Array of room objects to be displayed.
- * @param {function} onView - Callback fired when the "View" button is clicked for a room.
- * @param {function} onEdit - Callback fired when the "Edit" button is clicked for a room.
- * @param {function} onDelete - Callback fired when the "Delete" button is clicked for a room.
- * @param {function} onAdd - Callback fired when the "Add" button is clicked for a room.
+ * @param {Object} props - Component props.
+ * @param {Array<Object>} props.rooms - Array of room objects to be displayed.
+ * @param {string} props.rooms[].roomId - Unique identifier for the room.
+ * @param {string|number} props.rooms[].roomNumber - Room number.
+ * @param {number} props.rooms[].capacity - The number of people the room can accommodate.
+ * @param {number} props.rooms[].floor - The floor on which the room is located.
+ * @param {function} props.onView - Callback function triggered when the "View" button is clicked.
+ * @param {function} props.onEdit - Callback function triggered when the "Edit" button is clicked.
+ * @param {function} props.onDelete - Callback function triggered when the "Delete" button is clicked.
+ * @param {function} props.onAdd - Callback function triggered when the "Add" button is clicked.
+ * @returns {JSX.Element} A JSX element that renders a table of rooms with available actions.
  */
 const RoomTable = ({ rooms, onView, onEdit, onDelete, onAdd }) => {
     return (

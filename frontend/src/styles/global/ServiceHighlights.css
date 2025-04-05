@@ -1,11 +1,20 @@
-/* ServiceHighlights.css */
-
+/**
+ * Wrapper section for all service highlight cards.
+ * - Adds vertical and horizontal padding.
+ * - Applies background color via CSS variable.
+ * - Centers all internal content.
+ */
 .service-highlights {
     padding: 4rem 2rem;
     background-color: var(--bg-color);
     text-align: center;
 }
 
+/**
+ * Title text for the service section.
+ * - Large and bold.
+ * - Styled with Poppins font and margin for spacing.
+ */
 .section-title {
     font-size: 2.5rem;
     font-family: 'Poppins', sans-serif;
@@ -13,6 +22,11 @@
     color: #222;
 }
 
+/**
+ * Flex container holding individual service cards.
+ * - Wraps into new rows on smaller screens.
+ * - Centers all items with uniform spacing.
+ */
 .service-list {
     display: flex;
     flex-wrap: wrap;
@@ -20,6 +34,12 @@
     justify-content: center;
 }
 
+/**
+ * Individual card component for a single service.
+ * - White background with padding and rounded corners.
+ * - Uses subtle box-shadow for depth.
+ * - Hover effect includes lift + stronger shadow + border highlight.
+ */
 .service-card {
     background-color: white;
     border-radius: 1.25rem;
@@ -38,12 +58,21 @@
     border: 1px solid rgba(100, 149, 237, 0.3);
 }
 
+/**
+ * Icon element at the top of each card.
+ * - Uses blue theme.
+ * - Slight bottom margin for spacing.
+ */
 .icon {
     font-size: 2rem;
     color: #007BFF;
     margin-bottom: 1rem;
 }
 
+/**
+ * Text description for the service.
+ * - Slightly larger font with neutral dark color.
+ */
 .service-card p {
     margin: 0;
     font-size: 1.1rem;

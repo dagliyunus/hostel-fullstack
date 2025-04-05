@@ -1,11 +1,20 @@
-/* RoomShowcase.css */
-
+/**
+ * Main container for the room showcase section.
+ * - Adds spacing with padding.
+ * - Uses background variable for theming.
+ * - Centers all text content.
+ */
 .room-showcase {
     padding: 4rem 2rem;
     background-color: var(--bg-color);
     text-align: center;
 }
 
+/**
+ * Title for the section.
+ * - Large font size and spacing.
+ * - Uses Poppins font for modern style.
+ */
 .section-title {
     font-size: 2.5rem;
     margin-bottom: 3rem;
@@ -13,6 +22,11 @@
     color: #222;
 }
 
+/**
+ * Flex container for multiple room cards.
+ * - Stacks cards vertically.
+ * - Aligns to center with spacing between.
+ */
 .room-list {
     display: flex;
     flex-direction: column;
@@ -20,6 +34,11 @@
     align-items: center;
 }
 
+/**
+ * Main card element for each room.
+ * - Rounded with shadow and hover lift effect.
+ * - Responsive: switches to horizontal layout on larger screens.
+ */
 .room-card {
     position: relative;
     display: flex;
@@ -37,12 +56,21 @@
     transform: translateY(-5px);
 }
 
+/**
+ * Displays room image.
+ * - Covers width fully.
+ * - Uses object-fit for consistency.
+ */
 .room-image {
     width: 100%;
     height: 250px;
     object-fit: cover;
 }
 
+/**
+ * Container for room text content.
+ * - Padded and left-aligned.
+ */
 .room-info {
     padding: 2rem;
     font-family: 'Poppins', sans-serif;
@@ -60,6 +88,11 @@
     color: #666;
 }
 
+/**
+ * Call-to-action button inside room cards.
+ * - Styled as a primary button.
+ * - Transitions background color on hover.
+ */
 .details-btn {
     margin-top: 1rem;
     padding: 0.6rem 1.5rem;
@@ -76,6 +109,11 @@
     background-color: #0056b3;
 }
 
+/**
+ * Responsive Layout (min-width: 768px)
+ * - Turns .room-card horizontal.
+ * - Splits image and text into halves.
+ */
 @media (min-width: 768px) {
     .room-card {
         flex-direction: row;
@@ -91,6 +129,9 @@
     }
 }
 
+/**
+ * Fullscreen dark overlay for modals.
+ */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -104,6 +145,10 @@
     justify-content: center;
 }
 
+/**
+ * Pop-up modal container.
+ * - Contains image, description, close button.
+ */
 .modal-card {
     background: #fff;
     padding: 2rem;
@@ -115,12 +160,19 @@
     animation: fadeIn 0.3s ease-out;
 }
 
+/**
+ * Room image inside modal.
+ */
 .modal-image {
     width: 100%;
     border-radius: 8px;
     margin-bottom: 1rem;
 }
 
+/**
+ * Button to close modal.
+ * - Positioned in top-right corner.
+ */
 .close-btn {
     position: absolute;
     top: 12px;
@@ -131,17 +183,30 @@
     cursor: pointer;
 }
 
+/**
+ * Description text inside modal.
+ */
 .modal-desc {
     margin: 1rem 0;
     font-size: 1rem;
     color: #555;
 }
 
+/**
+ * @keyframes fadeIn
+ * Animation for modal entrance.
+ * - Fades in and scales up.
+ */
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
 
+/**
+ * Circular badge showing price.
+ * - Positioned top-right of the card.
+ * - Green background with shadow.
+ */
 .price-badge {
     position: absolute;
     top: 12px;
@@ -156,12 +221,20 @@
     z-index: 2;
 }
 
+/**
+ * Layout for multiple buttons inside a modal.
+ */
 .button-group {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
 }
 
+/**
+ * Booking action button.
+ * - Green background, bold text.
+ * - Transitions on hover.
+ */
 .book-btn {
     background-color: rgb(43, 168, 69);
     margin-left: 100px;

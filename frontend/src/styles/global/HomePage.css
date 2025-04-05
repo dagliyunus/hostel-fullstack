@@ -1,9 +1,23 @@
-
-/* Add to your global HomePage.css or index.css */
+/**
+ * Applies smooth scrolling behavior for anchor link navigation.
+ *
+ * - Enhances user experience when clicking on internal page anchors (e.g., #section).
+ * - Scrolls between sections with a smooth animation instead of jumping instantly.
+ */
 html {
     scroll-behavior: smooth;
 }
 
+/**
+ * Primary wrapper for the entire homepage layout.
+ *
+ * Layout & Behavior:
+ * - `width: 100vw`: Spans full viewport width.
+ * - `min-height: 100vh`: Ensures the container covers the full height of the screen, even with minimal content.
+ * - `display: flex` and `flex-direction: column`: Organizes children vertically (e.g., Hero, Services, Footer).
+ * - `background-color: var(--bg-color)`: Dynamically themed using a CSS variable.
+ * - `overflow-x: hidden`: Prevents horizontal scrolling caused by wide content or animations.
+ */
 .homepage-container {
     width: 100vw;
     min-height: 100vh;

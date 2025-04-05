@@ -3,6 +3,34 @@ import contactMessageService from "../../services/AdminServices/contactMessageSe
 import "../../../styles/admin/dashboard/contactmessage.css";
 import { format } from "date-fns";
 
+/**
+ * ContactMessage is a React functional component used for displaying a list of contact form messages.
+ * It fetches messages from the backend, allows marking them as read, and displays full details in a modal.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered contact message section containing the message table and optional modal.
+ *
+ * @description
+ * Features:
+ * - Fetches all contact messages from the server on mount using `contactMessageService.getAllMessages()`.
+ * - Supports viewing only the latest 5 messages or toggling to see all.
+ * - Allows marking individual messages as "read", which updates both backend and frontend state.
+ * - Shows message content inside a modal popup when "View" is clicked.
+ * - Handles loading and error states gracefully.
+ *
+ * State Variables:
+ * - `messages` (array): List of contact messages fetched from the server.
+ * - `loading` (boolean): Indicates whether the messages are currently being loaded.
+ * - `error` (string): Holds error messages in case of a failed fetch.
+ * - `showAll` (boolean): Toggles between showing only the latest 5 messages or all messages.
+ * - `selectedMessage` (object|null): Stores the currently selected message to display in a modal.
+ * - `showModal` (boolean): Controls visibility of the modal.
+ *
+ * Dependencies:
+ * - `contactMessageService` provides methods to fetch and update message data.
+ * - `date-fns` for date formatting.
+ */
+
 const ContactMessage = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,7 +48,7 @@ const ContactMessage = () => {
             const response = await contactMessageService.getAllMessages();
             setMessages(response.data.reverse());
         } catch {
-            setError("❌ Failed to fetch messages.");
+            setError(" Failed to fetch messages.");
         } finally {
             setLoading(false);
         }
@@ -37,7 +65,7 @@ const ContactMessage = () => {
             setSelectedMessage(message);
             setShowModal(true);
         } catch {
-            console.error("❌ Failed to mark message as read");
+            console.error(" Failed to mark message as read");
         }
     };
 
@@ -101,7 +129,7 @@ const ContactMessage = () => {
             {selectedMessage && showModal && (
                 <div className="modal-backdrop" onClick={closeModal}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        <h2>📧 Message from {selectedMessage.name}</h2>
+                        <h2> Message from {selectedMessage.name}</h2>
                         <p><strong>Email:</strong> {selectedMessage.email}</p>
                         <p><strong>Sent At:</strong> {format(new Date(selectedMessage.sentAt), "PPpp")}</p>
                         <hr />

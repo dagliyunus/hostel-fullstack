@@ -1,5 +1,13 @@
-/* BookingSection.css */
-
+/**
+ * Container section for the booking UI, typically wraps the booking form and related content.
+ *
+ * Layout:
+ * - Uses relative positioning to allow absolute-positioned pseudo-elements inside.
+ * - Padding gives vertical and horizontal spacing around the content.
+ * - Background color is controlled via a CSS variable (--bg-color), allowing dynamic theming.
+ * - Text is center-aligned for better visual flow.
+ * - `overflow: hidden` ensures floating blobs and any overflow visuals are clipped within this section.
+ */
 .booking-section {
     position: relative;
     padding: 0.5rem 0.5rem;
@@ -8,7 +16,21 @@
     overflow: hidden;
 }
 
-/* 🎨 Soft floating gradient blobs */
+/**
+ * .booking-section::before & ::after
+ * ----------------------------------
+ * Decorative pseudo-elements used to render soft, animated gradient blobs behind the booking section.
+ *
+ * - Both are absolutely positioned large circles (400x400px) with blurred edges for a dreamy visual effect.
+ * - They have reduced opacity and run an infinite animation (`floatBlob`) to simulate floating.
+ * - They are layered behind content using `z-index: 0`.
+ *
+ * `.booking-section::before`:
+ * - Blue-toned blob at top-left corner, offset upwards and left.
+ *
+ * `.booking-section::after`:
+ * - Pink-toned blob at bottom-right, delayed to alternate the animation cycle.
+ */
 .booking-section::before,
 .booking-section::after {
     content: '';
@@ -35,7 +57,14 @@
     animation-delay: 5s;
 }
 
-/* Blobs float subtly */
+/**
+ * @keyframes floatBlob
+ * Defines a vertical floating animation used for visual decoration (e.g., background blobs).
+ * - Starts at Y = 0px.
+ * - Moves downward by 40px at 50% progress.
+ * - Returns to Y = 0px at the end of the cycle.
+ * - Used to create a gentle up-down float illusion.
+ */
 @keyframes floatBlob {
     0%, 100% {
         transform: translateY(0px);
@@ -45,13 +74,24 @@
     }
 }
 
-/* ✨ Scroll-fade-in */
+/**
+ * Applies a fade-and-slide-up animation to the booking form.
+ * - The element is initially invisible and shifted downward.
+ * - Once triggered, it slides up and fades into full visibility.
+ * - Useful for scroll-triggered or initial load animations.
+ */
 .booking-form-box {
     animation: fadeSlideUp 1s ease forwards;
     opacity: 0;
     transform: translateY(40px);
 }
 
+/**
+ * @keyframes fadeSlideUp
+ * Defines an animation for fading in while sliding upward.
+ * - Animates from opacity 0 and translateY(40px) to opacity 1 and translateY(0px).
+ * - Gives a smooth appearing effect for UI elements.
+ */
 @keyframes fadeSlideUp {
     to {
         opacity: 1;
@@ -59,7 +99,14 @@
     }
 }
 
-/* ✨ Form container */
+/**
+ * Styles the main booking form container.
+ * - Uses a blurred, semi-transparent background with glassmorphism effect.
+ * - Applies a soft box-shadow and rounded corners for depth.
+ * - Contains form fields with vertical spacing and full-width layout.
+ * - Responsive max-width ensures good readability on various screen sizes.
+ * - Positioned above floating decorations (z-index: 1).
+ */
 .booking-form-box {
     position: relative;
     z-index: 1;
@@ -87,6 +134,73 @@
             0 0 0 1px rgba(255, 255, 255, 0.5) inset;
 }
 
+/**
+ * Horizontal rule used to visually separate sections within the booking form.
+ *
+ * - Full width line (`width: 100%`).
+ * - Removes default border (`border: 0`) and replaces with a light gray top border.
+ * - Vertical margin adds spacing above and below the line.
+ */
+.booking-form-box hr {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 1rem 0;
+}
+
+/**
+ * Containers for grouping inputs related to personal info and booking dates.
+ *
+ * - Uses flex layout to arrange inputs in a row.
+ * - `gap` ensures consistent spacing between input elements.
+ * - `flex-wrap: wrap` allows items to flow to the next line on smaller screens.
+ */
+.personal-info,
+.booking-dates {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/**
+ * Input fields within personal-info and booking-dates containers.
+ *
+ * - Flex-grow (`flex: 1`) allows inputs to expand and fill available space equally.
+ * - Ensures a minimum width for responsiveness and usability.
+ */
+.personal-info input,
+.booking-dates input {
+    flex: 1;
+    min-width: 180px;
+}
+
+/**
+ * Row container for the Room Type dropdown select element.
+ *
+ * - Takes full width of the form for alignment and consistency.
+ */
+.room-type-row {
+    width: 100%;
+}
+
+/**
+ * Room type selection dropdown.
+ *
+ * - Full width to match parent container.
+ * - Consistent font usage with rest of the form (`Poppins`).
+ */
+.room-type-row select {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+/**
+ * Styles for all input, select, and button elements within the booking form box.
+ *
+ * - Uniform padding, font size, and border-radius for consistent UI design.
+ * - Uses 'Poppins' font for modern typography.
+ * - Applies transitions to border and shadow for smooth interaction feedback.
+ */
 .booking-form-box input,
 .booking-form-box select,
 .booking-form-box button {
@@ -98,6 +212,12 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/**
+ * Specific styles for input and select fields:
+ * - Semi-transparent white background using rgba.
+ * - Text color set to dark gray for readability.
+ * - Initially set width to 0 (can be overridden by container layout).
+ */
 .booking-form-box input,
 .booking-form-box select {
     background-color: rgba(255, 255, 255, 0.18);
@@ -105,6 +225,11 @@
     width: 0;
 }
 
+/**
+ * Focus styles for input and select fields:
+ * - Removes default outline.
+ * - Adds blue border and subtle shadow glow for visual focus feedback.
+ */
 .booking-form-box input:focus,
 .booking-form-box select:focus {
     outline: none;
@@ -112,6 +237,12 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }
 
+/**
+ * Button styles within booking form:
+ * - Uses primary blue background with white text.
+ * - Removes default border and sets cursor to pointer.
+ * - Adds hover transition for dynamic color change.
+ */
 .booking-form-box button {
     background-color: #007BFF;
     color: #fff;
@@ -125,14 +256,15 @@
     background-color: #0056b3;
 }
 
-.booking-form-box hr {
-    width: 100%;
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 1rem 0;
-}
-
-/* ⛺ Booking + Guest Info */
+/**
+ * Grouped input layout for personal info and booking dates sections.
+  * These containers are used to hold multiple related input fields in a single row.
+ *
+ * Features:
+ * - `display: flex`: Lays out child inputs in a horizontal row.
+ * - `gap: 1rem`: Adds spacing between input fields.
+ * - `flex-wrap: wrap`: Ensures the layout wraps to the next line on smaller screens, keeping the UI responsive.
+ */
 .personal-info,
 .booking-dates {
     display: flex;
@@ -140,23 +272,48 @@
     flex-wrap: wrap;
 }
 
+/**
+ * Input fields within `.personal-info` and `.booking-dates`.
+ * Features:
+ * - `flex: 1`: Allows each input to grow and take up equal horizontal space.
+ * - `min-width: 180px`: Prevents inputs from becoming too narrow on small screens, ensuring usability.
+ */
 .personal-info input,
 .booking-dates input {
     flex: 1;
     min-width: 180px;
 }
 
-/* 🛏 Room Type Dropdown */
+
+/**
+ * Container for the room type dropdown selector.
+ *
+ * Layout:
+ * - Full width (`width: 100%`) to align with other form fields.
+ * - Ensures the dropdown spans the entire form row for better UX consistency.
+ */
 .room-type-row {
     width: 100%;
 }
 
+/**
+ * Styles the actual <select> element inside the room-type-row.
+ * Features:
+ * - Full width to fill the container.
+ * - Consistent font styling using 'Poppins' for modern UI look.
+ */
 .room-type-row select {
     width: 100%;
     font-family: 'Poppins', sans-serif;
 }
 
-/* 🧾 Modern Payment Method Styling */
+/**
+ * Container for displaying available payment method options.
+ * Layout :
+ * - Uses flexbox to stack payment method labels vertically.
+ * - `gap` provides spacing between each payment method option.
+ * - `margin: 0` ensures the component aligns flush with adjacent elements.
+ */
 .payment-methods-styled {
     display: flex;
     flex-direction: column;
@@ -164,6 +321,17 @@
     margin: 0;
 }
 
+/**
+ * Individual label styling for each payment method option.
+ *
+ * Design Features:
+ * - Flex layout to align icons and text horizontally with spacing (`gap: 0.6rem`).
+ * - Padding and border-radius for touch-friendly button-like appearance.
+ * - Semi-transparent background enhances modern aesthetic.
+ * - Smooth transitions for interactive hover/active feedback.
+ * - Cursor changes to pointer to indicate interactivity.
+ * - Font and color chosen for readability and consistency.
+ */
 .payment-methods-styled label {
     display: flex;
     align-items: center;
@@ -186,40 +354,92 @@
     transform: scale(1.02);
 }
 
+/**
+ * Styles applied to radio input elements inside the payment method section.
+ *
+ * Features:
+ * - Slightly enlarged using `transform: scale(1.1)` for better accessibility and visibility.
+ * - Uses `accent-color` to apply a custom primary blue to the native radio button.
+ */
 .payment-methods-styled input[type='radio'] {
     transform: scale(1.1);
     accent-color: #007BFF;
 }
 
+/**
+ * Styles for an active (selected) payment method label.
+ *
+ * Features:
+ * - Applies a light blue background and border color to indicate selection.
+ * - Used to visually distinguish the chosen payment option.
+ */
 .payment-methods-styled label.active {
     background-color: rgba(233, 241, 255, 0.6);
     border-color: #007BFF;
 }
 
+/**
+ * Styles for a disabled payment method label.
+ *
+ * Features:
+ * - Reduced opacity to signal unavailability.
+ * - Disables pointer interaction by setting the cursor to `not-allowed`.
+ * - Typically used when a payment method is temporarily inactive or restricted.
+ */
 .payment-methods-styled label.disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-/* 💳 Credit Card Fields */
+/**
+ * Container for all payment-related fields within the booking form.
+ *
+ * Layout:
+ * - Uses flexbox in column direction to stack inputs vertically.
+ * - `gap: 1rem` provides vertical spacing between each field group.
+ * - Ensures clean and readable vertical layout for payment input sections.
+ */
 .payment-fields {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
+/**
+ * Container for grouping multiple related payment inputs on the same line.
+ *
+ * Layout:
+ * - Uses horizontal flexbox layout (`display: flex`) to align inputs in a row.
+ * - `gap: 1rem` provides horizontal spacing between input fields.
+ * - `flex-wrap: wrap` ensures responsiveness by wrapping inputs to next line on smaller screens.
+ */
 .payment-row {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
 }
 
+/**
+ * Styles applied to individual input fields within `.payment-row`.
+ *
+ * Features:
+ * - `flex: 1` allows input to grow and share available space equally with siblings.
+ * - `min-width: 180px` ensures a baseline width for better readability on narrow screens.
+ */
 .payment-row input {
     flex: 1;
     min-width: 180px;
 }
 
-/* 💸 Total Price Pulse */
+/**
+ * Styles the total price display box in the booking form summary.
+ *
+ * Features:
+ * - Font styling for emphasis and readability.
+ * - Light background with a dashed border to visually separate it from form content.
+ * - Rounded corners and padding for modern card-like appearance.
+ * - Uses a pulsing animation to subtly attract user attention.
+ */
 .total-price {
     font-size: 1.1rem;
     font-family: 'Poppins', sans-serif;
@@ -233,6 +453,13 @@
     animation: pulsePrice 1.5s ease-in-out infinite alternate;
 }
 
+/**
+ * @keyframes pulsePrice
+ * Defines a soft pulsing animation effect for the total price box.
+ *
+ * - Grows slightly at 100% keyframe and lightens the background color.
+ * - Repeats infinitely with alternate direction to create a breathing effect.
+ */
 @keyframes pulsePrice {
     0% {
         transform: scale(1);
@@ -244,7 +471,14 @@
     }
 }
 
-/* 📐 Layout for Form + Summary */
+/**
+ * Layout container for aligning the booking form and summary panel side by side.
+ *
+ * Features:
+ * - Uses flexbox with wrapping support to stay responsive.
+ * - Spacing between items using `gap`.
+ * - Centers content horizontally and aligns items to the top.
+ */
 .booking-layout {
     display: flex;
     flex-wrap: wrap;
@@ -253,7 +487,24 @@
     align-items: flex-start;
 }
 
-/* 📋 Booking Summary Panel */
+
+/**
+ * Summary Panel Container
+ *
+ * .summary-box is used to display booking summary information such as
+ * room selection, total price, and other details.
+ *
+ * Layout and Visual Features:
+ * - `flex: 1`: Allows the summary box to grow and fill space within flex layout.
+ * - `min-width` & `max-width`: Ensures responsiveness while preserving readability.
+ * - `background`: Uses a soft semi-transparent gradient for a modern glassmorphism effect.
+ * - `backdrop-filter`: Applies blur for enhanced glass UI appearance.
+ * - `box-shadow`: Adds depth with both outer and inner shadows.
+ * - `transition`: Smooth transition on box-shadow and transform for hover effects.
+ * - `padding` & `border-radius`: Adds internal spacing and rounded corners.
+ * - `font-family`: Uses 'Poppins' for a clean and modern font style.
+ * - `z-index: 1`: Ensures this panel appears above background effects.
+ */
 .summary-box {
     flex: 1;
     min-width: 260px;
@@ -269,9 +520,15 @@
     border: 1px solid #ddd;
     font-family: 'Poppins', sans-serif;
     z-index: 1;
-
 }
 
+/**
+ * Heading inside the summary panel.
+ *
+ * - Inherits 'Outfit' font for modern emphasis.
+ * - Increased font size and spacing below for clear visual hierarchy.
+ * - Color is dark gray for better readability.
+ */
 .summary-box h4 {
     font-size: 1.4rem;
     font-family: 'Outfit', sans-serif;
@@ -279,18 +536,40 @@
     color: #222;
 }
 
+/**
+ * Paragraph text inside the summary box.
+ *
+ * - Balanced margin spacing for neat stacking.
+ * - Smaller font size for secondary details.
+ * - Medium gray color enhances readability without overpowering.
+ */
 .summary-box p {
     margin: 0.3rem 0;
     font-size: 0.95rem;
     color: #444;
 }
 
-/* 🌟 Font family update for heading */
+/**
+ * Applies a modern font style to section titles using the Outfit font.
+ *
+ * Usage: Add `modern-font` class to any `.section-title` element
+ * to switch to a contemporary typography style.
+ */
 .section-title.modern-font {
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
 }
 
+/**
+ * Displays the booking confirmation box with visual emphasis.
+ *
+ * Layout & Styling:
+ * - Positioned lower on the page with large `margin-top` and left offset.
+ * - Light aqua background conveys success (e.g., booking success).
+ * - Left-side green border enhances semantic styling (e.g., success alert).
+ * - Rounded corners and subtle shadow provide depth.
+ * - Uses a legible sans-serif font for better readability.
+ */
 .confirmation-panel {
     margin-top: 20rem;
     margin-left: -445px;
@@ -303,12 +582,28 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
+/**
+ * Heading element within the confirmation panel.
+ *
+ * Styling:
+ * - Larger font size for emphasis.
+ * - Bold green tone for success indication.
+ * - Spacing below the heading for clear separation.
+ */
 .confirmation-panel h3 {
     margin-bottom: 0.8rem;
     font-size: 1.5rem;
     color: #047857;
 }
 
+/**
+ * Container for listing available rooms visually.
+ *
+ * Layout:
+ * - Removes default list styling.
+ * - Uses flexbox for responsive horizontal/vertical layout.
+ * - Adds spacing between list items (`gap`).
+ */
 .available-rooms-list {
     list-style: none;
     padding-left: 0;
@@ -318,6 +613,15 @@
     color: #1a1a1a;
 }
 
+/**
+ * Individual room entry in the list.
+ *
+ * Styling:
+ * - White background with soft shadow gives card-like appearance.
+ * - Rounded corners for modern feel.
+ * - Transitions background on hover for interactivity.
+ * - Cursor changes to pointer to indicate clickability.
+ */
 .available-rooms-list li {
     background: white;
     padding: 0.75rem 1.2rem;
@@ -327,10 +631,17 @@
     transition: background-color 0.2s ease;
 }
 
+
 .available-rooms-list li:hover {
     background-color: #eefdf4;
 }
 
+/**
+ * Style for selected room in the list.
+ *
+ * - Green border and background highlight selection.
+ * - Bold text reinforces visual priority.
+ */
 .available-rooms-list li.selected-room {
     border: 2px solid #2ecc71;
     background-color: #e6fff0;

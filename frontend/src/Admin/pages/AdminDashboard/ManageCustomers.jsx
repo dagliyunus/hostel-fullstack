@@ -2,6 +2,31 @@ import React, { useEffect, useState } from 'react';
 import CustomerTable from '../../components/CustomerTable.jsx';
 import { getAllCustomers,  updateCustomer } from '../../services/AdminServices/customerService.js';
 
+/**
+ * ManageCustomers component is the admin interface for viewing and editing customer details.
+ *
+ * @component
+ * @returns {JSX.Element} A component that displays customer data and provides editing functionality via a popup.
+ *
+ * @description
+ * Features:
+ * - Fetches all customer records on initial render via `getAllCustomers()`.
+ * - Displays a list of customers in a table with edit buttons.
+ * - Allows inline editing of customer details through a popup modal.
+ * - On form submission, sends updates to the backend via `updateCustomer()`.
+ * - Automatically reloads the page after successful update to reflect changes.
+ *
+ * State Variables:
+ * - `customers` (Array): All customers fetched from the backend.
+ * - `loading` (boolean): Indicates whether customer data is being loaded.
+ * - `showEditPopup` (boolean): Toggles the visibility of the edit popup.
+ * - `editingCustomer` (Object|null): Stores the currently selected customer for editing.
+ *
+ * Editing Logic:
+ * - If a customer is selected for editing, pre-fills their information in a popup.
+ * - Fields include: first name, last name, email, phone, date of birth, room number.
+ * - Bed and room data are mapped into nested objects before sending to backend.
+ */
 const ManageCustomers = () => {
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -73,7 +98,7 @@ const ManageCustomers = () => {
                     />
             )}
 
-            {/* ✏️ Edit Customer Popup */}
+            {/*  Edit Customer Popup */}
             {showEditPopup && editingCustomer && (
                 <div className="popup">
                     <div className="popup-content">

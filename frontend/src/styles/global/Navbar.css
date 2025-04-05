@@ -1,6 +1,16 @@
-/* Navbar.css */
-
-/* Entire vertical nav */
+/**
+ * Vertical fixed-position navigation bar.
+ *
+ * Positioning:
+ * - Fixed on the left side of the viewport.
+ * - Vertically centered using `top: 50%` and `transform: translateY(-50%)`.
+ *
+ * Layout & Style:
+ * - Uses flexbox to arrange children vertically (`flex-direction: column`).
+ * - Spacing between elements provided by `gap`.
+ * - Semi-transparent white background with blur (glassmorphism effect).
+ * - Rounded corners and box-shadow for modern UI appearance.
+ */
 .navbar {
     position: fixed;
     top: 50%;
@@ -17,7 +27,14 @@
     backdrop-filter: blur(12px);
 }
 
-/* Brand (if you want logo at top) */
+/**
+ * Optional branding area inside the navbar (e.g., logo or vertical text).
+ *
+ * Features:
+ * - Rotated vertical text using `writing-mode` and `transform`.
+ * - Font styled to stand out with bold weight and spacing.
+ * - Positioned at the top of the navbar with margin.
+ */
 .navbar-brand {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
@@ -28,17 +45,34 @@
     margin-bottom: 1.5rem;
 }
 
-/* Nav links */
+/**
+ * Container for navigation links inside the navbar.
+ *
+ * - Removes default list styling (no bullets or padding/margin).
+ * - Provides structured layout for nested `<li>` elements.
+ */
 .navbar-links {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+/**
+ * Individual navigation item wrapper.
+ * - No margin or extra spacing needed; spacing is handled by `.navbar`.
+ */
 .navbar-links li {
     margin: 0;
 }
 
+/**
+ * Style for each clickable nav link.
+ *
+ * Features:
+ * - Clean typography with moderate font size and weight.
+ * - Rounded background on hover.
+ * - Smooth transition effect for color and scale.
+ */
 .navbar-links a {
     display: inline-block;
     text-decoration: none;
@@ -50,6 +84,12 @@
     border-radius: 8px;
 }
 
+/**
+ * Hover effect for navigation links.
+ *
+ * - Changes background and text color.
+ * - Adds a subtle scaling effect for feedback.
+ */
 .navbar-links a:hover {
     background-color: #e0f2ff;
     color: #007BFF;
