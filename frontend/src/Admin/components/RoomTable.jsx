@@ -14,10 +14,9 @@ import '../../styles/admin/managementTables/style.css';
  * @param {function} props.onView - Callback function triggered when the "View" button is clicked.
  * @param {function} props.onEdit - Callback function triggered when the "Edit" button is clicked.
  * @param {function} props.onDelete - Callback function triggered when the "Delete" button is clicked.
- * @param {function} props.onAdd - Callback function triggered when the "Add" button is clicked.
  * @returns {JSX.Element} A JSX element that renders a table of rooms with available actions.
  */
-const RoomTable = ({ rooms, onView, onEdit, onDelete, onAdd }) => {
+const RoomTable = ({ rooms, onView, onEdit, onDelete }) => {
     return (
         <div>
             <div className="payment-table-wrapper">
@@ -39,7 +38,6 @@ const RoomTable = ({ rooms, onView, onEdit, onDelete, onAdd }) => {
                         <td>{room.capacity}</td>
                         <td>{room.floor}</td>
                         <td>
-                            <button onClick={() => onAdd(room.roomId)}>Add</button>
                             <button onClick={() => onView(room.roomId)}>View</button>
                             <button onClick={() => onEdit(room.roomId)}>Edit</button>
                             <button onClick={() => onDelete(room.roomId)}>Delete</button>
