@@ -122,8 +122,8 @@ frontend/
 │   ├── components/        # Reusable UI components
 │   ├── pages/             # Route-based React pages
 │   ├── styles/            # CSS modules or global styles
-│   ├── router/            # React Router configuration (if applicable)
-│   ├── services/          # Axios API service wrappers (if applicable)
+│   ├── router/            # React Router configuration 
+│   ├── services/          # Axios API service wrappers 
 │   ├── App.jsx            # Main application wrapper
 │   └── main.jsx           # Application entry point
 ├── package.json           # Project metadata and scripts
