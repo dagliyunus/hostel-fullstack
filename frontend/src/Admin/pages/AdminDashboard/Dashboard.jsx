@@ -27,14 +27,14 @@ import ContactMessage from "./ContactMessage.jsx";
  * - Sidebar navigation is managed globally in `App.jsx`.
  * - `activeTab` is hardcoded to 'overview' but designed for dynamic tab selection in the future.
  */
-const Dashboard = () => {
+const Dashboard = ({isSidebarOpen}) => {
     const [activeTab] = useState('overview');
 
     const renderActiveTab = () => {
         switch (activeTab) {
             case 'overview':
                 return (
-                    <div className="dashboard-grid">
+                    <div className={`dashboard-grid ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
                         <Notification />
                         <ContactMessage />
                     </div>

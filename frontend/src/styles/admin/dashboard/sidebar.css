@@ -23,8 +23,18 @@
  * - Medium-large font size and spacing from items below.
  */
 .sidebar-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.4rem;
+    color: white;
+    margin: 0;
+    padding-left: 48px;
+    line-height: 1.8rem;
+}
+
+.sidebar-header{
+    display: none;
 }
 
 /**
@@ -62,17 +72,6 @@
  * Responsive behavior for section headers.
  * - On small screens, rearranges layout for better readability.
  */
-@media (max-width: 600px) {
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .section-header button {
-        width: 100%;
-        margin-top: 10px;
-    }
-}
 
 /**
  * .sidebar-nav li
@@ -149,4 +148,65 @@
  */
 .logout-icon {
     font-size: 18px;
+}
+
+
+/* Toggle Button (Mobile only) */
+.sidebar-toggle-btn {
+    display: none;
+}
+
+/**
+Responsive Design
+ */
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-btn {
+        display: block;
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 1101;
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        color: white;
+        cursor: pointer;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 230px;
+        height: 100vh;
+        background-color: #111827;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+        padding: 80px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-title {
+        font-size: 1.4rem;
+        color: white;
+        margin-bottom: 20px;
+        padding-left: 40px;
+    }
+
+    .admin-main-content.sidebar-open,
+    .admin-main-content.sidebar-closed {
+        margin-left: 0;
+    }
+
+    .dashboard-grid {
+        left: 0;
+        align-items: flex-start;
+    }
 }

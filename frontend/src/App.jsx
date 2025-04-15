@@ -16,6 +16,7 @@ import './styles/admin/dashboard/dashboard.css';
 import './styles/admin/managementTables/style.css';
 import './styles/admin/dashboard/payment.css';
 import './styles/admin/adminLoginPage/adminLogin.css';
+import {FiMenu, FiX} from "react-icons/fi";
 
 /**
  * AdminPanel Component
@@ -35,6 +36,10 @@ import './styles/admin/adminLoginPage/adminLogin.css';
  */
 const AdminPanel = () => {
     const [activeTab, setActiveTab] = useState('overview');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const toggleSidebar = () => {
+        setIsSidebarOpen(prev => !prev);
+    }
 
     /**
      * Returns the component to be rendered based on the currently selected tab.
@@ -43,26 +48,35 @@ const AdminPanel = () => {
      * @returns {JSX.Element} Component for the selected tab.
      */
     const renderTab = () => {
+        const commonProps ={isSidebarOpen};
         switch (activeTab) {
             case 'overview':
-                return <Dashboard />;
+                return <Dashboard {...commonProps} activeTab={activeTab} />;
             case 'rooms':
-                return <ManageRooms />;
+                return <ManageRooms {...commonProps} />;
             case 'customers':
-                return <ManageCustomers />;
+                return <ManageCustomers {...commonProps}/>;
             case 'bookings':
-                return <ManageBookings />;
+                return <ManageBookings {...commonProps}/>;
             case 'payments':
-                return <ManagePayment />;
+                return <ManagePayment {...commonProps}/>;
             default:
-                return <Dashboard />;
+                return <Dashboard {...commonProps}/>;
         }
     };
 
     return (
         <div className="admin-app-container">
-            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-            <main className="admin-main-content">
+            <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
+                {isSidebarOpen ? <FiX /> : <FiMenu />}
+            </button>
+            <Sidebar
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                isOpen={isSidebarOpen}
+                setIsOpen={setIsSidebarOpen}
+            />
+            <main className={`admin-main-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
                 {renderTab()}
             </main>
         </div>

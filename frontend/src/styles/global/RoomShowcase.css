@@ -114,6 +114,7 @@
  * - Turns .room-card horizontal.
  * - Splits image and text into halves.
  */
+/*
 @media (min-width: 768px) {
     .room-card {
         flex-direction: row;
@@ -128,7 +129,7 @@
         width: 50%;
     }
 }
-
+*/
 /**
  * Fullscreen dark overlay for modals.
  */
@@ -250,4 +251,126 @@
 
 .book-btn:hover {
     background-color: #218838;
+}
+
+/**
+Responsive Design
+ */
+@media screen and (max-width: 1024px) {
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .room-info h3 {
+        font-size: 1.5rem;
+    }
+
+    .room-info p {
+        font-size: 0.95rem;
+    }
+
+    .details-btn {
+        font-size: 0.95rem;
+        padding: 0.5rem 1.2rem;
+    }
+
+    .modal-desc {
+        font-size: 0.95rem;
+    }
+    .book-btn {
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .room-showcase {
+        padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .room-list {
+        gap: 2rem;
+    }
+
+    .room-card {
+        max-width: 100%;
+        border-radius: 1rem;
+    }
+
+    .room-info {
+        padding: 1.5rem;
+    }
+
+    .room-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .room-info p {
+        font-size: 0.9rem;
+    }
+
+    .details-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .modal-card {
+        padding: 1.5rem;
+    }
+
+    .book-btn {
+        margin-left: auto;
+        display: block;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .room-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .room-info p {
+        font-size: 0.85rem;
+    }
+
+    .details-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.9rem;
+    }
+
+    .modal-desc {
+        font-size: 0.9rem;
+    }
+
+    .modal-card {
+        padding: 1.2rem;
+    }
+
+    .room-image {
+        height: 200px;
+    }
+
+    .price-badge {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+
+    .book-btn {
+        font-size: 0.9rem;
+        margin-top: 12px;
+        margin-left: auto;
+    }
 }

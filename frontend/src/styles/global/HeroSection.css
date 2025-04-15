@@ -36,7 +36,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: url('/public/example.jpg');
+    background-image: url('/example.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -54,9 +54,10 @@
  */
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     text-align: center;
     color: white;
+
 }
 
 /**
@@ -268,4 +269,123 @@
 .group-booking-card .group-text a:hover {
     color: #ffeccc;
     border-color: #ffeccc;
+}
+
+
+/**
+Responsive design
+ */
+@media screen and (max-width: 1024px) {
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .group-booking-card {
+        top: 5rem;
+        right: 1rem;
+        max-width: 220px;
+        padding: 0.8rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .booking-form input {
+        width: 160px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .hero-section {
+        padding: 4.5rem 0 1rem;
+        justify-content: flex-start;
+        flex-direction: column;
+        text-align: center;
+        min-height: 100vh;
+    }
+
+    .hero-bg {
+        background-size: cover;
+        background-position: center top;
+    }
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .booking-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-form input,
+    .booking-form button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .group-booking-card {
+        position: static;
+        margin-top: 1.5rem;
+        width: 90%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    .scroll-down-cue {
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-section {
+        padding: 4.5rem 0 1rem;
+        min-height: 100vh;
+    }
+
+    .hero-bg {
+        background-size: cover;
+        background-position: center 25%;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .booking-form input {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+    }
+
+    .booking-form button {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+    }
+
+    .scroll-icon {
+        font-size: 1.2rem;
+    }
+
+    .group-booking-card {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .group-booking-card .group-text {
+        font-size: 0.85rem;
+    }
+
+    .group-booking-card .group-text strong {
+        font-size: 0.95rem;
+    }
 }

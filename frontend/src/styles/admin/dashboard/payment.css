@@ -12,6 +12,10 @@
     margin: 0 auto 900px 215px;
 }
 
+html, body {
+    overflow-x: auto !important;
+}
+
 /**
  * - Wraps the table in a scrollable container if horizontal overflow occurs.
  * - Adds an entrance animation for visual appeal.
@@ -87,4 +91,85 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+@media screen and (max-width: 1024px) {
+    .payment-wrapper {
+        min-width: unset;
+        margin: 0 auto 900px 0;
+    }
+}
+
+/**
+Responsive Design
+ */
+@media screen and (max-width: 768px) {
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        overflow-y: auto;
+        background-color: #111827;
+    }
+    .payment-wrapper {
+        min-width: unset;
+        margin: 0 auto 320px auto;
+        padding: 0 10px;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .payment-header{
+        width: 60%;
+    }
+
+
+    .payment-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    .payment-table {
+        min-width: 1000px;
+        font-size: 14px;
+        width: max-content;
+        border-spacing: 0;
+        overflow: hidden;
+    }
+
+    .payment-table thead th,
+    .payment-table td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .payment-table td {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    html, body {
+        font-size: 14px;
+        padding: 0;
+        overflow-y: auto;
+        background-color: #111827;
+    }
+    .payment-table {
+        min-width: 500px;
+    }
+
+    .payment-wrapper {
+        padding: 40px 5px;
+
+
+    }
+
+    .payment-table thead th,
+    .payment-table td {
+        padding: 8px;
+        font-size: 12.5px;
+    }
+
 }

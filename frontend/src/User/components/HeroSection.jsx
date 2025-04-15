@@ -54,22 +54,9 @@ const HeroSection = ({ setSearchCriteria }) => {
 
     return (
         <section className="hero-section">
-            <div className="hero-bg" />
+            <div className="hero-bg"  />
 
-            {/* Group Booking Info Card */}
-            <Motion.div
-                className="group-booking-card"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-                whileHover={{ scale: 1.03 }}
-            >
-                <p className="group-text">
-                     <strong>Planning a group trip?</strong><br />
-                    <a href="#contact">Contact us</a> for exclusive group rates & comfort!
-                </p>
-            </Motion.div>
-
+            {/* Hero Main Content */}
             <Motion.div
                 className="hero-content"
                 initial={{ opacity: 0, y: 20 }}
@@ -103,6 +90,20 @@ const HeroSection = ({ setSearchCriteria }) => {
                     />
                     <button type="submit">Book Your Stay</button>
                 </form>
+            </Motion.div>
+
+            {/* Group Booking Info Card (Moved Below for Mobile) */}
+            <Motion.div
+                className="group-booking-card"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                whileHover={{ scale: 1.03 }}
+            >
+                <p className="group-text">
+                    <strong>Planning a group trip?</strong><br />
+                    <a href="#contact">Contact us</a> for exclusive group rates & comfort!
+                </p>
             </Motion.div>
 
             <div className="scroll-down-cue">
