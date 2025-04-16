@@ -170,7 +170,7 @@ Make sure your backend (`Spring Boot`) is running at `http://localhost:8080` to 
 
 ## License
 
-This project is developed for educational and demonstration purposes. Licensing details can be added here if needed.
+This project is developed for educational and demonstration purposes. 
 
 ## Contact
 
