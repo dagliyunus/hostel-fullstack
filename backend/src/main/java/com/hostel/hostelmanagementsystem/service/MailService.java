@@ -27,8 +27,8 @@ public class MailService {
     public MailService() {
         MailtrapConfig config = new MailtrapConfig.Builder()
                 .sandbox(true)
-                .inboxId(3448305L) // replace with your actual inbox ID
-                .token("d580d87f96f1b517690c64bade0c0840") // replace with your actual token
+                .inboxId(3448305L) // my inbox id
+                .token("d580d87f96f1b517690c64bade0c0840") // my token
                 .build();
         this.client = MailtrapClientFactory.createMailtrapClient(config);
     }
